@@ -581,7 +581,7 @@ video {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: transparent;
+  background-color: rgba(245, 240, 232, 0.08);
   color: var(--text-on-dark);
   font-family: var(--font-sans);
   font-size: 14px;
@@ -590,15 +590,15 @@ video {
   text-transform: uppercase;
   padding: 14px 30px;
   border-radius: 6px;
-  border: 1px solid var(--border-dark);
+  border: 1.5px solid rgba(245, 240, 232, 0.52);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color var(--transition-ui), border-color var(--transition-ui);
+  transition: background-color var(--transition-ui), border-color var(--transition-ui), color var(--transition-ui);
 }
 
 .btn-ghost-dark:hover {
-  background-color: rgba(245, 240, 232, 0.08);
-  border-color: rgba(245, 240, 232, 0.28);
+  background-color: rgba(245, 240, 232, 0.16);
+  border-color: rgba(245, 240, 232, 0.80);
   color: var(--text-on-dark);
 }
 

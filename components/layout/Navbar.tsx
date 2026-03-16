@@ -271,8 +271,8 @@ export default function Navbar() {
             />
 
             {/* Enquire CTA */}
-            <Link href="/contact" className="nav-enquire">
-              Enquire
+            <Link href="/sell" className="nav-enquire">
+              Request a Valuation
             </Link>
 
           </div>
@@ -362,13 +362,13 @@ export default function Navbar() {
 
         <div className="mt-12 pt-8 flex flex-col gap-4" style={{ borderTop: '1px solid var(--border-dark)' }}>
           <Link
-            href="/contact"
+            href="/sell"
             className="type-btn"
             style={{ color: 'var(--cta-primary-bg)' }}
             onClick={() => setMenuOpen(false)}
             tabIndex={menuOpen ? 0 : -1}
           >
-            Enquire →
+            Request a Valuation →
           </Link>
           <a
             href="tel:+34971000000"

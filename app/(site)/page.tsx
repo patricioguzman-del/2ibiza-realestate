@@ -2,6 +2,8 @@ import nextDynamic from 'next/dynamic'
 import { client } from '../../sanity/lib/client'
 import { featuredPropertiesQuery, allAreasQuery } from '../../sanity/lib/queries'
 import Hero from '../../components/home/Hero'
+import TrustSection from '../../components/home/TrustSection'
+import PropertySearch from '../../components/home/PropertySearch'
 import FeaturedListings from '../../components/home/FeaturedListings'
 import EditorialBreak from '../../components/home/EditorialBreak'
 import AreasGrid from '../../components/home/AreasGrid'
@@ -32,7 +34,17 @@ export default async function HomePage() {
         <Hero />
       </ErrorBoundary>
 
-      {/* 2–7. Below-fold sections get scroll-triggered fade-up entrance */}
+      {/* 2. Trust / credibility — immediate follow-up to the hero */}
+      <ErrorBoundary>
+        <TrustSection />
+      </ErrorBoundary>
+
+      {/* 3. Search module */}
+      <ErrorBoundary>
+        <PropertySearch />
+      </ErrorBoundary>
+
+      {/* 3–8. Below-fold sections get scroll-triggered fade-up entrance */}
       <ErrorBoundary>
         <ScrollReveal>
           <FeaturedListings properties={properties} />
