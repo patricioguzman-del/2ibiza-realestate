@@ -221,11 +221,12 @@ export default async function PropertyDetailPage(
               <h1
                 className="font-serif"
                 style={{
-                  color:        'var(--text-primary)',
-                  fontWeight:   500,
-                  lineHeight:   1.05,
-                  marginBottom: '20px',
-                  maxWidth:     '680px',
+                  color:         'var(--text-primary)',
+                  fontWeight:    500,
+                  letterSpacing: '-0.025em',
+                  lineHeight:    1.05,
+                  marginBottom:  '20px',
+                  maxWidth:      '680px',
                 }}
               >
                 {property.title}

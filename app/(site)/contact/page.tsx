@@ -30,6 +30,8 @@ const CONTACT_INFO = [
   { label: 'WhatsApp',   value: '+34 6XX XXX XXX'  },
 ]
 
+const ERROR_COLOR = 'rgba(185,60,60,0.6)'
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
   const [errors,    setErrors]    = useState<FormErrors>({})
@@ -48,24 +50,6 @@ export default function ContactPage() {
     setErrors({})
     setSubmitted(true)
   }
-
-  const inputStyle: React.CSSProperties = {
-    width:           '100%',
-    fontFamily:      'var(--font-sans)',
-    fontSize:        '14px',
-    fontWeight:      400,
-    color:           'var(--text-primary)',
-    backgroundColor: 'var(--surface-primary)',
-    border:          '1px solid var(--border-muted)',
-    padding:         '0 18px',
-    height:          '52px',
-    outline:         'none',
-    transition:      'border-color var(--transition-ui)',
-  }
-
-  const focusStyle  = { borderColor: 'var(--cta-primary-bg)' }
-  const blurStyle   = { borderColor: 'var(--border-muted)'   }
-  const errorBorder = { borderColor: 'rgba(185,60,60,0.6)'   }
 
   return (
     <>
@@ -88,7 +72,8 @@ export default function ContactPage() {
             className="font-serif"
             style={{
               color:         'var(--text-on-dark)',
-              fontWeight:    400,
+              fontWeight:    500,
+              letterSpacing: '-0.025em',
               fontSize:      'clamp(2.75rem, 5vw, 4rem)',
               marginTop:     '12px',
             }}
@@ -111,7 +96,7 @@ export default function ContactPage() {
               className="font-serif"
               style={{
                 color:        'var(--text-primary)',
-                fontWeight:   400,
+                fontWeight:   500,
                 fontSize:     'clamp(1.5rem, 2.5vw, 2rem)',
                 marginBottom: '2rem',
               }}
@@ -142,35 +127,33 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="firstName" className="sr-only">First Name</label>
+                    <label htmlFor="firstName" className="label-base">First Name</label>
                     <input
                       id="firstName"
                       placeholder="First Name"
                       value={firstName}
                       onChange={e => setFirstName(e.target.value)}
-                      style={{ ...inputStyle, ...(errors.firstName ? errorBorder : {}) }}
-                      onFocus={e => Object.assign(e.currentTarget.style, focusStyle)}
-                      onBlur={e  => Object.assign(e.currentTarget.style, errors.firstName ? errorBorder : blurStyle)}
+                      className="input-base"
+                      style={errors.firstName ? { borderColor: ERROR_COLOR } : undefined}
                     />
                     {errors.firstName && (
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'rgba(185,60,60,0.85)', marginTop: '4px' }}>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
                         {errors.firstName}
                       </p>
                     )}
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="sr-only">Last Name</label>
+                    <label htmlFor="lastName" className="label-base">Last Name</label>
                     <input
                       id="lastName"
                       placeholder="Last Name"
                       value={lastName}
                       onChange={e => setLastName(e.target.value)}
-                      style={{ ...inputStyle, ...(errors.lastName ? errorBorder : {}) }}
-                      onFocus={e => Object.assign(e.currentTarget.style, focusStyle)}
-                      onBlur={e  => Object.assign(e.currentTarget.style, errors.lastName ? errorBorder : blurStyle)}
+                      className="input-base"
+                      style={errors.lastName ? { borderColor: ERROR_COLOR } : undefined}
                     />
                     {errors.lastName && (
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'rgba(185,60,60,0.85)', marginTop: '4px' }}>
+                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
                         {errors.lastName}
                       </p>
                     )}
@@ -178,53 +161,48 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="sr-only">Email Address</label>
+                  <label htmlFor="email" className="label-base">Email Address</label>
                   <input
                     id="email"
                     type="email"
                     placeholder="Email Address"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    style={{ ...inputStyle, ...(errors.email ? errorBorder : {}) }}
-                    onFocus={e => Object.assign(e.currentTarget.style, focusStyle)}
-                    onBlur={e  => Object.assign(e.currentTarget.style, errors.email ? errorBorder : blurStyle)}
+                    className="input-base"
+                    style={errors.email ? { borderColor: ERROR_COLOR } : undefined}
                   />
                   {errors.email && (
-                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'rgba(185,60,60,0.85)', marginTop: '4px' }}>
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
                       {errors.email}
                     </p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="sr-only">Phone Number</label>
+                  <label htmlFor="phone" className="label-base">Phone Number (optional)</label>
                   <input
                     id="phone"
-                    placeholder="Phone Number (optional)"
+                    placeholder="+34 6XX XXX XXX"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
-                    style={inputStyle}
-                    onFocus={e => Object.assign(e.currentTarget.style, focusStyle)}
-                    onBlur={e  => Object.assign(e.currentTarget.style, blurStyle)}
+                    className="input-base"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="sr-only">How can we help?</label>
+                  <label htmlFor="subject" className="label-base">How can we help?</label>
                   <select
                     id="subject"
                     value={subject}
                     onChange={e => setSubject(e.target.value)}
+                    className="input-base"
                     style={{
-                      ...inputStyle,
-                      appearance:   'none',
-                      cursor:       'pointer',
-                      color:        subject ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      appearance: 'none',
+                      cursor:     'pointer',
+                      color:      subject ? 'var(--text-primary)' : 'var(--text-tertiary)',
                     }}
-                    onFocus={e => Object.assign(e.currentTarget.style, focusStyle)}
-                    onBlur={e  => Object.assign(e.currentTarget.style, blurStyle)}
                   >
-                    <option value="">How can we help?</option>
+                    <option value="">Select a topic</option>
                     <option>I want to buy a property</option>
                     <option>I want to sell a property</option>
                     <option>I want a property valuation</option>
@@ -233,25 +211,23 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="sr-only">Your message</label>
+                  <label htmlFor="message" className="label-base">Your message</label>
                   <textarea
                     id="message"
                     rows={5}
                     placeholder="Your message..."
                     value={message}
                     onChange={e => setMessage(e.target.value)}
+                    className="input-base"
                     style={{
-                      ...inputStyle,
-                      height:    'auto',
-                      padding:   '14px 18px',
-                      resize:    'none',
-                      ...(errors.message ? errorBorder : {}),
+                      height:  'auto',
+                      padding: '14px 18px',
+                      resize:  'none',
+                      ...(errors.message ? { borderColor: ERROR_COLOR } : {}),
                     }}
-                    onFocus={e => Object.assign(e.currentTarget.style, focusStyle)}
-                    onBlur={e  => Object.assign(e.currentTarget.style, errors.message ? errorBorder : blurStyle)}
                   />
                   {errors.message && (
-                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: 'rgba(185,60,60,0.85)', marginTop: '4px' }}>
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
                       {errors.message}
                     </p>
                   )}
@@ -271,7 +247,7 @@ export default function ContactPage() {
               className="font-serif"
               style={{
                 color:        'var(--text-primary)',
-                fontWeight:   400,
+                fontWeight:   500,
                 fontSize:     'clamp(1.5rem, 2.5vw, 2rem)',
                 marginBottom: '2rem',
               }}

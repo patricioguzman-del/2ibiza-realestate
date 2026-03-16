@@ -93,7 +93,7 @@ export default function SellPage() {
               className="font-serif"
               style={{
                 color:         'var(--text-on-dark)',
-                fontWeight:    400,
+                fontWeight:    500,
                 letterSpacing: '-0.025em',
                 fontSize:      'clamp(2.75rem, 6vw, 5rem)',
                 lineHeight:    1.0,
@@ -117,7 +117,7 @@ export default function SellPage() {
             className="font-serif text-center"
             style={{
               color:        'var(--text-primary)',
-              fontWeight:   400,
+              fontWeight:   500,
               fontSize:     'clamp(1.875rem, 3vw, 2.5rem)',
               marginBottom: 'clamp(2.5rem, 4vw, 4rem)',
             }}

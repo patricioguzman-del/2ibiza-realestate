@@ -66,7 +66,7 @@ export default async function AboutPage() {
             className="font-serif"
             style={{
               color:         'var(--text-on-dark)',
-              fontWeight:    400,
+              fontWeight:    500,
               letterSpacing: '-0.025em',
               fontSize:      'clamp(2.75rem, 6vw, 5rem)',
               lineHeight:    1.0,
@@ -163,7 +163,7 @@ export default async function AboutPage() {
 
       {/* ── Team ───────────────────────────────────────────────────── */}
       {team.length > 0 && (
-        <div style={{ backgroundColor: 'var(--surface-primary)', paddingBlock: 'clamp(3.5rem, 6vw, 5rem)' }}>
+        <div style={{ backgroundColor: 'var(--bg-canvas)', paddingBlock: 'clamp(3.5rem, 6vw, 5rem)' }}>
           <div
             className="mx-auto"
             style={{ maxWidth: 'var(--content-lg)', paddingInline: 'clamp(1.5rem, 5vw, 4rem)' }}
@@ -183,7 +183,7 @@ export default async function AboutPage() {
               {team.map((member: any) => (
                 <div key={member._id} className="text-center">
                   <div
-                    className="relative rounded-full overflow-hidden mx-auto mb-6"
+                    className="relative overflow-hidden mx-auto mb-6"
                     style={{ width: '192px', height: '192px' }}
                   >
                     {member.photo ? (
