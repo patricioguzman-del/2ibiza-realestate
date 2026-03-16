@@ -1,26 +1,1578 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Backgrounds ── */
+  --bg-canvas:        #F6F4EF;   /* Soft Limestone — primary page background */
+  --bg-canvas-soft:   #F6F4EF;   /* Soft Limestone — same */
+  --bg-section-muted: #EFEAE2;   /* Warm Sand — alternating sections */
+  --bg-deep:          #2F3A37;   /* Deep Olive — dark sections, nav, footer */
+  --bg-deep-soft:     #3A4844;   /* Deep Olive (lighter) — secondary dark */
+
+  /* ── Surfaces ── */
+  --surface-primary:   #FFFFFF;              /* Pure White — cards, forms */
+  --surface-secondary: #EFEAE2;             /* Warm Sand — secondary surfaces */
+  --surface-dark:      #3A4844;
+  --surface-glass:     rgba(255, 255, 255, 0.82);
+
+  /* ── Text ── */
+  --text-primary:       #2B2F2A;   /* Deep Olive Charcoal — headings + body */
+  --text-secondary:     #6B726C;   /* Muted Olive Grey — descriptions, meta */
+  --text-tertiary:      #8A9089;
+  --text-on-dark:       #F5F0E8;   /* Warm Cream — text on dark surfaces */
+  --text-on-dark-muted: #9EAAA6;   /* Muted — secondary text on dark */
+
+  /* ── Accents ── */
+  --accent-sea:   #2F6F73;   /* Mediterranean Sea Teal */
+  --accent-sand:  #C8B89A;   /* Warm Sand */
+  --accent-stone: #9E8E78;   /* Limestone Stone */
+  --accent-olive: #6A7A5A;   /* Olive Grove */
+
+  /* ── CTA ── */
+  --cta-primary-bg:       #C86E4A;   /* Mediterranean Terracotta */
+  --cta-primary-text:     #FFFFFF;   /* White on terracotta */
+  --cta-secondary-border: #E4E0D8;
+  --cta-secondary-text:   #2B2F2A;
+
+  /* ── Borders ── */
+  --border-soft:   #E4E0D8;   /* Soft warm border */
+  --border-muted:  #ECE8E1;   /* Subtle divider */
+  --border-dark:   rgba(245, 240, 232, 0.14);
+  --rule-accent:   #C8B89A;   /* Warm sand rule */
+
+  /* ── State ── */
+  --success: #557A63;
+  --warning: #A47B46;
+  --error:   #A4584A;
+  --info:    #4A6D7B;
+
+  /* ── Overlays ── */
+  --overlay-dark-soft:      rgba(47, 58, 55, 0.24);
+  --overlay-dark-medium:    rgba(47, 58, 55, 0.38);
+  --overlay-gradient-hero:  linear-gradient(180deg, rgba(47,58,55,0.18) 0%, rgba(47,58,55,0.42) 100%);
+  --overlay-light:          rgba(246, 241, 232, 0.72);
+
+  /* ── Shadows ── */
+  --shadow-soft:    0 8px 24px rgba(47, 58, 55, 0.08);
+  /*
+    Restrained shadow progression per brand motion spec.
+    Resting and hover values — never exceed hover by much.
+    Using deep olive rgba for warm, non-blue-grey shadows.
+  */
+  --shadow-resting: 0 2px 6px rgba(47, 58, 55, 0.05), 0 8px 24px rgba(47, 58, 55, 0.08);
+  --shadow-hover:   0 4px 10px rgba(47, 58, 55, 0.08), 0 14px 34px rgba(47, 58, 55, 0.12);
+
+  /* ── Typography ── */
+  --font-serif: 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-sans:  'Manrope', system-ui, -apple-system, sans-serif;
+
+  /* ── Spacing scale (8px base) ── */
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-6:  48px;
+  --space-8:  64px;
+  --space-12: 96px;
+  --space-15: 120px;
+
+  /* ── Section spacing ── */
+  --section-major:      120px;  /* desktop — see .section-major for responsive steps */
+  --section-major-md:    96px;  /* tablet */
+  --section-major-sm:    72px;  /* mobile */
+  --section-dark-boost:  12px;  /* extra padding on dark sections */
+  --section-secondary:   72px;
+  --section-hero-top:   120px;
+  --section-hero-bot:    96px;
+
+  /* ── Containers ── */
+  --content-sm:  960px;
+  --content-md:  1200px;
+  --content-lg:  1360px;
+  --content-xl:  1440px;
+
+  /* ── Border radius ── */
+  --radius-sm:  0px;
+  --radius-md:  0px;
+  --radius-lg:  0px;
+
+  /* ── Transitions ── */
+  --transition-ui:     180ms ease;
+  --transition-smooth: 220ms ease;
+  --transition-slow:   350ms ease;
+
+  /* ── Easing ── */
+  /*
+    Expo out: smooth deceleration, feels physical and refined.
+    Use as the standard easing for all card/surface interactions.
+  */
+  --ease-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+/* ─── Tailwind Theme Registration ────────────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Backgrounds */
+  --color-canvas:        var(--bg-canvas);
+  --color-canvas-soft:   var(--bg-canvas-soft);
+  --color-section-muted: var(--bg-section-muted);
+  --color-deep:          var(--bg-deep);
+  --color-deep-soft:     var(--bg-deep-soft);
+
+  /* Surfaces */
+  --color-surface:           var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-dark:      var(--surface-dark);
+
+  /* Text */
+  --color-ink:           var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted:     var(--text-tertiary);
+  --color-on-dark:       var(--text-on-dark);
+  --color-on-dark-muted: var(--text-on-dark-muted);
+
+  /* Accents */
+  --color-sea:   var(--accent-sea);
+  --color-sand:  var(--accent-sand);
+  --color-stone: var(--accent-stone);
+  --color-olive: var(--accent-olive);
+
+  /* CTA */
+  --color-gold:      var(--cta-primary-bg);
+  --color-gold-text: var(--cta-primary-text);
+
+  /* Borders */
+  --color-border:       var(--border-soft);
+  --color-border-muted: var(--border-muted);
+
+  /* Fonts */
+  --font-serif: var(--font-serif);
+  --font-sans:  var(--font-sans);
+
+  /* Brand aliases (strict guideline tokens) */
+  --color-primary-bg:   var(--bg-canvas-soft);    /* #F6F4EF Soft Limestone */
+  --color-secondary-bg: var(--bg-section-muted);  /* #EFEAE2 Warm Sand */
+  --color-text-main:    var(--text-primary);       /* #2B2F2A Deep Olive Charcoal */
+  --color-text-muted:   var(--text-secondary);     /* #6B726C Muted Olive Grey */
+  --color-accent:       var(--cta-primary-bg);     /* #C86E4A Mediterranean Terracotta */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base Reset ─────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-canvas-soft); /* primary-bg: #F6F4EF Soft Limestone */
+  color: var(--text-primary);              /* text-main: #2B2F2A Deep Olive Charcoal */
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Grain texture overlay (tactile depth) ──────────────────────────────── */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── Typography Scale ───────────────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 5.5vw, 4.25rem); /* 44px → 68px — commanding, cinematic */
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  /*
+    Editorial section titles: raised floor to 42px so they
+    always read as a confident headline, even on small screens.
+    Line-height 1.12 gives each line room to breathe.
+  */
+  font-size: clamp(2.625rem, 4vw, 3rem); /* 42px → 48px */
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: clamp(1.75rem, 2.8vw, 2.25rem); /* 28px → 36px */
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: clamp(1.375rem, 2.2vw, 1.625rem); /* 22px → 26px */
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.125rem; /* 18px — slightly more generous paragraph spacing */
+  font-family: var(--font-sans);
+}
+
+strong,
+b {
+  font-weight: 500;
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-ui);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent-sea);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+/* ─── Images ─────────────────────────────────────────────────────────────── */
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-section-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-stone);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-sea);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-stone) var(--bg-section-muted);
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+
+::selection {
+  background: var(--cta-primary-bg);
+  color: var(--cta-primary-text);
+}
+
+/* ─── Skip-to-content ────────────────────────────────────────────────────── */
+
+.skip-link {
+  position:   absolute;
+  top:        -9999px;
+  left:       -9999px;
+  z-index:    9999;
+  outline:    none;
+}
+.skip-link:focus-visible {
+  position:    fixed;
+  top:         0;
+  left:        0;
+  padding:     12px 20px;
+  background:  var(--cta-primary-bg);
+  color:       #fff;
+  font-family: var(--font-sans);
+  font-size:   14px;
+  font-weight: 500;
+  text-decoration: none;
+  outline:     none;
+}
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--accent-sea);
+  outline-offset: 2px;
+}
+
+/* ─── Layout Utilities ───────────────────────────────────────────────────── */
+
+.container-md {
+  width: 100%;
+  max-width: var(--content-md);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+}
+
+.container-lg {
+  width: 100%;
+  max-width: var(--content-lg);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+}
+
+.container-xl {
+  width: 100%;
+  max-width: var(--content-xl);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+}
+
+/* Legacy .container alias → maps to content-lg */
+.container {
+  width: 100%;
+  max-width: var(--content-lg);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ─── Section Spacing ────────────────────────────────────────────────────── */
+
+/*
+  Section padding: precise breakpoint steps.
+  Mobile  ≤767px:   72px  (comfortable scroll pacing on small screens)
+  Tablet  768–1023: 96px  (intermediate breathing room)
+  Desktop ≥1024px: 120px  (editorial luxury at full width)
+*/
+.section-major {
+  padding-top:    72px;
+  padding-bottom: 72px;
+}
+
+@media (min-width: 768px) {
+  .section-major {
+    padding-top:    96px;
+    padding-bottom: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-major {
+    padding-top:    120px;
+    padding-bottom: 120px;
+  }
+}
+
+/*
+  Dark section boost: +12px vertical padding.
+  Dark backgrounds feel visually heavier — extra breathing room
+  prevents the section from reading as compressed.
+  Use on: WhySection, MarketIntelligence, ValuationCTA.
+*/
+.section-major-dark {
+  padding-top:    84px;
+  padding-bottom: 84px;
+}
+
+@media (min-width: 768px) {
+  .section-major-dark {
+    padding-top:    108px;
+    padding-bottom: 108px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-major-dark {
+    padding-top:    132px;
+    padding-bottom: 132px;
+  }
+}
+
+.section-secondary {
+  padding-block: clamp(3.5rem, 6vw, 5.5rem); /* 56px → 88px */
+}
+
+.section-hero {
+  padding-top: clamp(5rem, 8vw, 7.5rem);
+  padding-bottom: clamp(4rem, 6vw, 6rem);
+}
+
+/* ─── Typography Utility Classes ─────────────────────────────────────────── */
+
+/* ─── Word-mask (hero H1 clip reveal) ───────────────────────────────────── */
+
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-right: 0.26em;
+  line-height: inherit;
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
+}
+
+.word-mask:last-child {
+  margin-right: 0;
+}
+
+.type-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.type-nav {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.type-btn {
+  font-family: var(--font-sans);
+  font-size: 14px;           /* was 13px — slightly more weight */
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.10em;   /* was 0.12em — less spread, more legible */
+  text-transform: uppercase;
+}
+
+.type-caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;          /* was 500 — captions are soft, not bold */
+  line-height: 1.5;          /* was 1.45 — slightly more breathing room */
+}
+
+.type-body-lg {
+  /*
+    Lead / intro paragraph. Raised floor to 19px so it clearly
+    reads as distinct from normal body copy.
+  */
+  font-family: var(--font-sans);
+  font-size: clamp(1.1875rem, 2vw, 1.3125rem); /* 19px → 21px */
+  font-weight: 400;
+  line-height: 1.68;
+}
+
+.type-body {
+  /*
+    Main body copy. 17px gives noticeably better readability at
+    arm's length vs 16px, especially on large monitors.
+  */
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;      /* 17px — was 16px */
+  font-weight: 400;
+  line-height: 1.72;         /* was 1.65 */
+}
+
+.type-body-sm {
+  /*
+    Secondary copy, card meta, captions. 15px is still clearly
+    subordinate to body but more comfortable to read than 14px.
+  */
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;      /* 15px — was 14px */
+  font-weight: 400;
+  line-height: 1.65;         /* was 1.55 */
+}
+
+/* ─── Button Base Styles ─────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--cta-primary-bg);
+  color: var(--cta-primary-text);
+  font-family: var(--font-sans);
+  font-size: 14px;           /* was 13px */
+  font-weight: 500;
+  letter-spacing: 0.10em;   /* was 0.12em — restrained luxury */
+  text-transform: uppercase;
+  padding: 15px 30px;        /* was 14/28 — slightly more generous */
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: filter var(--transition-ui), background-color var(--transition-ui);
+}
+
+.btn-primary:hover {
+  filter: brightness(0.92);
+  color: var(--cta-primary-text);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  color: var(--cta-secondary-text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border-radius: 6px;
+  border: 1px solid var(--cta-secondary-border);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-ui), color var(--transition-ui);
+}
+
+.btn-secondary:hover {
+  background-color: var(--cta-primary-bg);
+  color: var(--cta-primary-text);
+}
+
+/* Dark context buttons */
+.btn-ghost-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  color: var(--text-on-dark);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border-dark);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-ui), border-color var(--transition-ui);
+}
+
+.btn-ghost-dark:hover {
+  background-color: rgba(245, 240, 232, 0.08);
+  border-color: rgba(245, 240, 232, 0.28);
+  color: var(--text-on-dark);
+}
+
+/* ─── Card Base Styles ───────────────────────────────────────────────────── */
+
+.card-surface {
+  background-color: var(--surface-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: none;
+  border: 1px solid var(--border-muted);
+}
+
+.card-surface-premium {
+  background-color: var(--surface-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: none;
+  border: 1px solid var(--border-soft);
+}
+
+/* ─── Form / Input Base Styles ───────────────────────────────────────────── */
+
+.input-base {
+  width: 100%;
+  background-color: var(--surface-primary);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  padding: 12px 16px;
+  /*
+    Transition both border-color and box-shadow so focus ring
+    appears with the same smooth deceleration as all other interactions.
+  */
+  transition:
+    border-color 180ms var(--ease-expo),
+    box-shadow   180ms var(--ease-expo),
+    background-color 180ms var(--ease-expo);
+  appearance: none;
+}
+
+.input-base::placeholder {
+  color: var(--text-tertiary);
+}
+
+.input-base:hover:not(:focus) {
+  border-color: var(--border-soft);
+  background-color: var(--bg-canvas-soft);
+}
+
+.input-base:focus {
+  outline:      none;
+  border-color: var(--accent-sea);
+  box-shadow:   0 0 0 2px rgba(61, 111, 115, 0.10);  /* was 3px/0.12 — softer ring */
+  background-color: var(--surface-primary);
+}
+
+.input-dark {
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border-dark);
+  border-radius: 0;
+  color: var(--text-on-dark);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 0;
+  transition: border-color 180ms var(--ease-expo);
+}
+
+.input-dark::placeholder {
+  color: var(--text-on-dark-muted);
+  opacity: 0.5;
+}
+
+.input-dark:hover:not(:focus) {
+  border-bottom-color: rgba(245,240,232,0.28);
+}
+
+.input-dark:focus {
+  outline: none;
+  border-bottom-color: var(--cta-primary-bg);
+}
+
+.input-base:disabled,
+.input-dark:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.label-base {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.label-gold {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cta-primary-bg);
+  margin-bottom: 6px;
+}
+
+/* ─── Divider / Rule ─────────────────────────────────────────────────────── */
+
+.rule-accent {
+  width: 100%;
+  height: 1px;
+  background-color: var(--rule-accent);
+  border: none;
+}
+
+.rule-soft {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-muted);
+  border: none;
+}
+
+/* ─── Eyebrow row (line + label) ─────────────────────────────────────────── */
+
+.eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eyebrow-row::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--accent-sand);
+  flex-shrink: 0;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Directional image reveal — clip wipes from top downward */
+@keyframes imgReveal {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0%   0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.animate-img-reveal {
+  animation: imgReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ─── Font Utilities ─────────────────────────────────────────────────────── */
+
+.font-serif { font-family: var(--font-serif); }
+.font-sans  { font-family: var(--font-sans);  }
+
+/* ─── Hover Link Utilities (for Server Components) ───────────────────────── */
+
+/* Dark background: muted → full on-dark */
+.hover-on-dark {
+  color: rgba(245, 240, 232, 0.62);
+  transition: color var(--transition-ui);
+  text-decoration: none;
+}
+.hover-on-dark:hover {
+  color: var(--text-on-dark);
+}
+
+/* Dark background: muted → gold */
+.hover-on-dark-gold {
+  color: rgba(245, 240, 232, 0.52);
+  transition: color var(--transition-ui);
+  text-decoration: none;
+}
+.hover-on-dark-gold:hover {
+  color: var(--cta-primary-bg);
+}
+
+/* Subtle fade on hover — dark backgrounds */
+.hover-opacity-72 {
+  transition: opacity var(--transition-ui);
+}
+.hover-opacity-72:hover {
+  opacity: 0.72;
+}
+
+/* Light background: text-primary → gold */
+.hover-on-light-gold {
+  color: var(--text-primary);
+  transition: color var(--transition-ui);
+  text-decoration: none;
+}
+.hover-on-light-gold:hover {
+  color: var(--cta-primary-bg);
+}
+
+/* Link that is already gold, darkens on hover */
+.hover-gold-muted {
+  color: var(--cta-primary-bg);
+  transition: color var(--transition-ui);
+  text-decoration: none;
+}
+.hover-gold-muted:hover {
+  color: var(--text-on-dark);
+}
+
+/* Section header "View All" link */
+.section-more-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-ui);
+  flex-shrink: 0;
+}
+.section-more-link:hover {
+  color: var(--cta-primary-bg);
+}
+
+/* Enquire button in navbar */
+.nav-enquire {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--cta-primary-bg);
+  color: var(--cta-primary-bg);
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color var(--transition-ui), color var(--transition-ui);
+}
+.nav-enquire:hover {
+  background-color: var(--cta-primary-bg);
+  color: var(--cta-primary-text);
+}
+
+/* Nav link — with underline-expand animation */
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.85);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-ui);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--cta-primary-bg);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-ui);
+}
+.nav-link:hover {
+  color: var(--text-on-dark);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+.nav-link-active {
+  color: var(--cta-primary-bg);
+}
+.nav-link-active::after {
+  transform: scaleX(1);
+}
+
+/* Phone / soft link */
+.nav-phone {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.4);
+  text-decoration: none;
+  transition: color var(--transition-ui);
+}
+.nav-phone:hover {
+  color: var(--text-on-dark);
+}
+
+/* Area / blog heading hover */
+.heading-hover-sea {
+  color: var(--text-primary);
+  transition: color var(--transition-ui);
+}
+.heading-hover-sea:hover {
+  color: var(--accent-sea);
+}
+
+/* Featured properties — "View All Properties →" centered CTA */
+.featured-view-all {
+  display:        inline-flex;
+  align-items:    center;
+  font-family:    var(--font-sans);
+  font-size:      13px;
+  font-weight:    500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--text-primary);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom:  1px solid transparent;
+  transition:
+    color        var(--transition-ui),
+    border-color var(--transition-ui);
+}
+
+.featured-view-all:hover {
+  color:         var(--cta-primary-bg);
+  border-bottom-color: var(--cta-primary-bg);
+}
+
+/* Section "more" link — dark background context */
+/* Hero secondary CTA — "Sell Your Property" text link */
+.hero-sell-link {
+  font-family:     var(--font-sans);
+  font-size:       12px;
+  font-weight:     500;
+  letter-spacing:  0.12em;
+  text-transform:  uppercase;
+  color:           rgba(245, 240, 232, 0.48);
+  text-decoration: none;
+  display:         inline-flex;
+  align-items:     center;
+  gap:             6px;
+  transition:      color var(--transition-ui);
+  padding-block:   4px;
+}
+.hero-sell-link:hover {
+  color: var(--text-on-dark);
+}
+
+/* Section "more" link — dark background context */
+.section-more-link-dark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.72);
+  text-decoration: none;
+  transition: color var(--transition-ui);
+  flex-shrink: 0;
+}
+.section-more-link-dark:hover {
+  color: var(--text-on-dark);
+}
+
+/* ─── Dark-surface form labels ───────────────────────────────────────────── */
+.label-dark {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.60);
+  margin-bottom: 6px;
+}
+
+/* ─── WhatsApp floating action button ────────────────────────────────────── */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 100;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #25D366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.20), 0 1px 6px rgba(0, 0, 0, 0.10);
+  transition: transform 200ms var(--ease-expo), box-shadow 200ms var(--ease-expo);
+}
+.whatsapp-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24), 0 2px 8px rgba(0, 0, 0, 0.10);
+  color: #ffffff;
+}
+
+/* Area listing card text block — hover border via CSS group */
+.area-listing-card-text {
+  border-bottom: 2px solid transparent;
+  transition: border-color 200ms var(--ease-expo);
+}
+.group:hover .area-listing-card-text {
+  border-color: var(--cta-primary-bg);
+}
+
+/* Footer column divider — only on desktop */
+@media (min-width: 1024px) {
+  .footer-col-sep {
+    border-left: 1px solid var(--border-dark);
+  }
+}
+
+/*
+  Footer column headings.
+  Slightly larger than eyebrow (14px vs 12px) and with reduced
+  letter-spacing — feels warmer and less rigid than type-eyebrow
+  while maintaining a clear hierarchy over the link list below.
+*/
+.footer-col-title {
+  font-family:    var(--font-sans);
+  font-size:      13px;
+  font-weight:    500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height:    1.2;
+}
+
+/*
+  Prose reading column.
+  Apply to <div> wrappers around long-form text to constrain
+  line length to the optimal 60–70 characters.
+*/
+.prose-reading {
+  max-width: 68ch;
+}
+
+/*
+  List rhythm — sensible defaults for content lists
+  (benefit lists, feature lists, trust points).
+*/
+ul.list-editorial,
+ol.list-editorial {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;           /* 16px between list items */
+}
+
+ul.list-editorial li,
+ol.list-editorial li {
+  font-family:  var(--font-sans);
+  font-size:    1.0625rem; /* matches .type-body */
+  line-height:  1.72;
+  color:        var(--text-primary);
+  padding-left: 1.25rem;
+  position:     relative;
+}
+
+ul.list-editorial li::before {
+  content:          '–';
+  position:         absolute;
+  left:             0;
+  color:            var(--cta-primary-bg);
+  font-weight:      500;
+}
+
+/* Dropdown menu link (light surface context) */
+.dropdown-link {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 16px;
+  transition: color var(--transition-ui), background-color var(--transition-ui);
+  white-space: nowrap;
+}
+.dropdown-link:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-canvas-soft);
+}
+
+/* ─── Card Interaction System ────────────────────────────────────────────
+   Three interaction tiers based on card weight:
+
+   property-card-hover  — featured property listings — strongest response
+   area-card-hover      — destination area cards     — medium, immersive
+   journal-card-hover   — editorial / blog cards     — lightest, restrained
+
+   All three share the same easing (--ease-expo) and duration band (200ms).
+   Shadows use rgba(47,58,55,…) — deep olive — for warm, non-blue-grey
+   shadow cast on both light and dark background cards.
+─────────────────────────────────────────────────────────────────────── */
+
+/*
+  Property cards.
+  Most interactive tier: -4px lift, full shadow progression,
+  border-color refinement from muted → soft.
+*/
+.property-card-hover {
+  transition:
+    transform    200ms var(--ease-expo),
+    box-shadow   200ms var(--ease-expo),
+    border-color 200ms var(--ease-expo);
+  box-shadow:   var(--shadow-resting);
+  will-change:  transform;
+}
+.property-card-hover:hover {
+  transform:    translateY(-4px);
+  box-shadow:   var(--shadow-hover);
+  border-color: var(--border-soft);  /* slightly more defined than --border-muted */
+}
+
+/*
+  Area cards.
+  Full-bleed image containers: lift + shadow without overflow clipping.
+  Needs a non-overflow-hidden outer wrapper to show shadow.
+  Scale and overlay are handled by the inner group in the component.
+*/
+.area-card-hover {
+  transition:
+    transform  200ms var(--ease-expo),
+    box-shadow 200ms var(--ease-expo);
+  will-change: transform;
+}
+.area-card-hover:hover {
+  transform:  translateY(-3px);
+  box-shadow: 0 8px 28px rgba(47, 58, 55, 0.20), 0 3px 8px rgba(47, 58, 55, 0.08);
+}
+
+/*
+  Journal / editorial cards.
+  Lightest tier: -2px lift only, restrained shadow, border refinement.
+  No dramatic movement — these read as publications, not products.
+*/
+.journal-card-hover {
+  transition:
+    transform    200ms var(--ease-expo),
+    box-shadow   200ms var(--ease-expo),
+    border-color 200ms var(--ease-expo);
+  box-shadow:   0 1px 4px rgba(47, 58, 55, 0.05);
+  will-change:  transform;
+}
+.journal-card-hover:hover {
+  transform:    translateY(-2px);
+  box-shadow:   0 4px 16px rgba(47, 58, 55, 0.09), 0 1px 4px rgba(47, 58, 55, 0.05);
+  border-color: var(--border-soft);
+}
+
+/*
+  Legacy alias — kept for backward-compat, maps to area card behavior.
+  Not actively used since AreaCard was refactored to use area-card-hover.
+*/
+.area-destination-card {
+  transition:
+    transform    200ms var(--ease-expo),
+    box-shadow   200ms var(--ease-expo);
+}
+.area-destination-card:hover {
+  transform:  translateY(-3px);
+  box-shadow: 0 8px 28px rgba(47, 58, 55, 0.16), 0 3px 8px rgba(47, 58, 55, 0.08);
+}
+
+/*
+  Group-level heading color shift.
+  .heading-hover-sea responds to both:
+    (a) direct hover on the heading element, and
+    (b) hover anywhere on the parent .group (card-level hover).
+  This ensures the title shifts when hovering the card image,
+  not only when the cursor is directly over the text.
+*/
+.group:hover .heading-hover-sea {
+  color: var(--accent-sea);
+}
+
+/* ─── Property Detail — secondary gallery grid ──────────────────────── */
+
+/*
+  2-column mosaic grid.
+  Every 6th image (i=0, i=5) spans 2 columns for editorial rhythm.
+*/
+.prop-gallery-grid {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   4px;
+}
+
+.prop-gallery-cell {
+  position:   relative;
+  overflow:   hidden;
+  aspect-ratio: 4/3;
+  padding:    0;
+  border:     none;
+  cursor:     pointer;
+  background: var(--bg-canvas);
+  display:    block;
+}
+
+.prop-gallery-cell--large {
+  grid-column: span 2;
+  aspect-ratio: 16/7;
+}
+
+@media (min-width: 640px) {
+  .prop-gallery-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:                   6px;
+  }
+  .prop-gallery-cell--large {
+    grid-column: span 2;
+  }
+}
+
+/* ─── Property Discovery UI ──────────────────────────────────────────── */
+
+/*
+  Filter pills — quick type / attribute filters
+  Inactive: outlined, transparent bg
+  Active:   dark bg + on-dark text
+*/
+.filter-pill {
+  display:         inline-flex;
+  align-items:     center;
+  font-family:     var(--font-sans);
+  font-size:       12px;
+  font-weight:     500;
+  letter-spacing:  0.08em;
+  line-height:     1;
+  padding:         7px 14px;
+  border-radius:   0;
+  border:          1px solid var(--border-soft);
+  color:           var(--text-secondary);
+  background:      transparent;
+  cursor:          pointer;
+  white-space:     nowrap;
+  transition:
+    background-color var(--transition-ui),
+    border-color     var(--transition-ui),
+    color            var(--transition-ui);
+}
+.filter-pill:hover {
+  border-color: var(--text-secondary);
+  color:        var(--text-primary);
+}
+.filter-pill--active {
+  background:   var(--bg-deep);
+  border-color: var(--bg-deep);
+  color:        var(--text-on-dark);
+}
+.filter-pill--active:hover {
+  background:   var(--bg-deep-soft);
+  border-color: var(--bg-deep-soft);
+  color:        var(--text-on-dark);
+}
+
+/* Compact select — secondary filter row */
+.input-filter {
+  font-family:      var(--font-sans);
+  font-size:        11px;
+  font-weight:      400;
+  letter-spacing:   0.04em;
+  color:            var(--text-secondary);
+  background-color: transparent;
+  border:           1px solid var(--border-muted);
+  border-radius:    0;
+  padding:          5px 10px;
+  appearance:       none;
+  outline:          none;
+  transition:
+    border-color var(--transition-ui),
+    color        var(--transition-ui);
+}
+.input-filter:hover {
+  border-color: var(--border-soft);
+}
+.input-filter:focus {
+  border-color: var(--accent-sea);
+  color:        var(--text-primary);
+}
+
+/* ─── Market Intelligence — metrics row ─────────────────────────────── */
+/*
+  Section background: --bg-deep-soft (dark teal). All borders use
+  --border-dark (rgba white) so they read correctly on the dark surface.
+
+  Mobile:    1 column stack
+  Tablet:    2 × 2 grid  (4 metrics = 2 even rows)
+  Desktop:   4 equal columns in a horizontal row
+*/
+
+.market-metrics-grid {
+  display:               grid;
+  grid-template-columns: 1fr;
+  gap:                   0;
+}
+
+/* --4 variant locks the desktop column count to 4 */
+.market-metrics-grid--4 {
+  --mi-cols-desktop: 4;
+}
+
+.market-metric-item {
+  padding:       clamp(28px, 3.5vw, 40px) 0;
+  border-bottom: 1px solid var(--border-dark);
+  border-right:  none !important; /* override inline on mobile */
+}
+
+/* Last item on mobile: no bottom border */
+.market-metric-item:last-child {
+  border-bottom: none;
+}
+
+/* ── Tablet: 2-column 2×2 ──────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .market-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .market-metric-item {
+    padding:       clamp(28px, 3.5vw, 40px) clamp(20px, 2.5vw, 32px);
+    border-bottom: 1px solid var(--border-dark);
+    border-right:  none !important;
+  }
+
+  /* Left column: add right divider */
+  .market-metric-item:nth-child(odd) {
+    border-right: 1px solid var(--border-dark) !important;
+  }
+
+  /* Right column: no right border */
+  .market-metric-item:nth-child(even) {
+    border-right: none !important;
+  }
+
+  /* Bottom row (items 3 & 4): remove bottom border */
+  .market-metric-item:nth-last-child(-n+2):nth-child(odd),
+  .market-metric-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ── Desktop: 4-column horizontal row ─────────────────────────────── */
+@media (min-width: 1024px) {
+  .market-metrics-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+    align-items:           start;
+  }
+
+  /* All items: remove bottom border, restore right divider */
+  .market-metrics-grid--4 .market-metric-item {
+    padding:       0 clamp(24px, 2.5vw, 40px);
+    border-bottom: none !important;
+    border-right:  1px solid var(--border-dark);
+  }
+
+  /* Reset tablet odd/even overrides */
+  .market-metrics-grid--4 .market-metric-item:nth-child(odd) {
+    border-right: 1px solid var(--border-dark);
+  }
+  .market-metrics-grid--4 .market-metric-item:nth-child(even) {
+    border-right: 1px solid var(--border-dark);
+  }
+
+  /* First item: flush left */
+  .market-metrics-grid--4 .market-metric-item:first-child {
+    padding-left: 0;
+  }
+
+  /* Last item: no right border, flush right */
+  .market-metrics-grid--4 .market-metric-item:last-child {
+    padding-right: 0;
+    border-right:  none !important;
+  }
+}
+
+/* ─── Hero Search Bar ────────────────────────────────────────────────── */
+
+.search-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  /* Glassmorphism */
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  /* Shape & depth */
+  border-radius: 8px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 4px 16px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  overflow: hidden;
+}
+
+.search-input-wrapper {
+  flex: 1;
+  min-width: 0; /* prevent flex overflow */
+  padding: 14px 20px 12px;
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  transition: background-color 160ms ease;
+}
+
+.search-input-wrapper:hover {
+  background-color: rgba(246, 244, 239, 0.55);
+}
+
+.search-input-wrapper:focus-within {
+  background-color: rgba(246, 244, 239, 0.75);
+}
+
+.search-field-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cta-primary-bg);
+  margin-bottom: 5px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.search-field-select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+  /* custom chevron */
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238A9089' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 2px center;
+  padding-right: 18px;
+}
+
+.search-field-select.is-placeholder {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 0 28px;
+  min-height: 58px;
+  background-color: var(--cta-primary-bg);
+  color: var(--cta-primary-text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: filter 160ms ease, gap 160ms ease;
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  filter: brightness(0.91);
+  gap: 13px;
+}
+
+/* Mobile: 2-column grid */
+@media (max-width: 767px) {
+  .search-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 8px;
+  }
+
+  .search-input-wrapper {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  }
+
+  .search-input-wrapper:nth-child(odd) {
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
+  }
+
+  .search-btn {
+    grid-column: span 2;
+    min-height: 52px;
+    padding: 14px;
+    gap: 10px;
+  }
+}
+
+/* ─── Accessibility: respect reduced-motion preference ──────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+
+  /*
+    Card lift and image scale are purely decorative — remove them.
+    Shadow and border-color state changes can remain since they
+    communicate interactivity without inducing motion.
+  */
+  .property-card-hover:hover,
+  .area-card-hover:hover,
+  .journal-card-hover:hover {
+    transform: none !important;
+  }
+
+  /* Image zoom is decorative — remove under reduced motion */
+  .group:hover img {
+    transform: none !important;
+  }
 }
