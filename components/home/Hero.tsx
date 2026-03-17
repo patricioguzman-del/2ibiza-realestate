@@ -11,8 +11,8 @@ import { BUDGET_OPTIONS, BED_OPTIONS, PROPERTY_TYPE_LABELS } from '../../lib/con
 const HEADLINE_WORDS = ['Ibiza', 'property,', 'found', 'privately.']
 
 const AREAS = [
-  'Ibiza Town', 'Santa Eulalia', 'San José',
-  'Santa Gertrudis', 'North Ibiza',
+  'Ibiza', 'Santa Eulalia', 'San José',
+  'San Antonio', 'San Juan',
 ]
 
 const TYPES = Object.values(PROPERTY_TYPE_LABELS)
