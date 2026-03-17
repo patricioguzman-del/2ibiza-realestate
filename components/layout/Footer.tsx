@@ -10,11 +10,11 @@ const PROPERTY_LINKS = [
 ]
 
 const AREA_LINKS = [
-  { href: '/areas/ibiza-town',      label: 'Ibiza Town'      },
-  { href: '/areas/santa-eulalia',   label: 'Santa Eulalia'   },
-  { href: '/areas/san-jose',        label: 'San José'        },
-  { href: '/areas/santa-gertrudis', label: 'Santa Gertrudis' },
-  { href: '/areas/north-ibiza',     label: 'North Ibiza'     },
+  { href: '/areas/ibiza',         label: 'Ibiza'         },
+  { href: '/areas/santa-eulalia', label: 'Santa Eulalia' },
+  { href: '/areas/san-jose',      label: 'San José'      },
+  { href: '/areas/san-antonio',   label: 'San Antonio'   },
+  { href: '/areas/san-juan',      label: 'San Juan'      },
 ]
 
 const NAV_LINKS = [
