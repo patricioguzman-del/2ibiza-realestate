@@ -70,7 +70,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ backgroundColor: 'var(--bg-deep)' }}>
+    <footer style={{ backgroundColor: 'var(--bg-deep)', borderTop: '1px solid rgba(245,240,232,0.10)' }}>
 
       {/* ── Main grid ──────────────────────────────────────────────── */}
       {/*

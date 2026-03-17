@@ -10,44 +10,43 @@ interface BlogPreviewProps {
   posts: any[]
 }
 
-// ─── Data ──────────────────────────────────────────────────────────────────
+// ─── Fallback blog posts ────────────────────────────────────────────────────
 
 const FALLBACK = [
   {
-    _id: '1',
-    title: 'Ibiza Property Market Outlook 2026',
-    slug: { current: 'ibiza-market-outlook-2026' },
-    category: 'market-report',
+    _id:         '1',
+    title:       'Ibiza Property Market Outlook 2026',
+    slug:        { current: 'ibiza-market-outlook-2026' },
+    category:    'market-report',
     publishedAt: '2026-03-01T00:00:00Z',
-    mainImage: null,
+    mainImage:   null,
     excerpt:
       'An analysis of pricing trends, buyer demand and emerging opportunities across the island as the market enters a new cycle.',
   },
   {
-    _id: '2',
-    title: 'Understanding Tourist Licenses in Ibiza',
-    slug: { current: 'tourist-licenses-ibiza' },
-    category: 'guide',
+    _id:         '2',
+    title:       'Understanding Tourist Licenses in Ibiza',
+    slug:        { current: 'tourist-licenses-ibiza' },
+    category:    'guide',
     publishedAt: '2026-02-12T00:00:00Z',
-    mainImage: null,
-    excerpt: null,
+    mainImage:   null,
+    excerpt:     null,
   },
   {
-    _id: '3',
-    title: 'Where Families Choose to Live in Ibiza',
-    slug: { current: 'family-living-ibiza' },
-    category: 'lifestyle',
+    _id:         '3',
+    title:       'Where Families Choose to Live in Ibiza',
+    slug:        { current: 'family-living-ibiza' },
+    category:    'lifestyle',
     publishedAt: '2026-01-28T00:00:00Z',
-    mainImage: null,
-    excerpt: null,
+    mainImage:   null,
+    excerpt:     null,
   },
 ]
 
-// Placeholder imagery — replace with curated editorial photography per article
 const FALLBACK_IMGS = [
-  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=750&fit=crop',  // featured — villa/architecture wide
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',   // guide — architectural
-  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',   // lifestyle — landscape
+  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=750&fit=crop',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
 ]
 
 const CATS: Record<string, string> = {
@@ -57,7 +56,6 @@ const CATS: Record<string, string> = {
   'lifestyle':     'Lifestyle',
 }
 
-// "March 2026" — matches the brief's editorial date style
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })
 }
@@ -65,41 +63,36 @@ function formatDate(iso: string) {
 // ─── Component ─────────────────────────────────────────────────────────────
 
 export default function BlogPreview({ posts }: BlogPreviewProps) {
-  const display = (posts?.length ? posts : FALLBACK).slice(0, 3)
+  const display    = (posts?.length ? posts : FALLBACK).slice(0, 3)
   const [featured, ...secondary] = display
 
   return (
     <section
       className="section-major"
-      style={{ backgroundColor: 'var(--bg-canvas-soft)' }}
+      style={{ backgroundColor: 'var(--bg-canvas-soft)', paddingBottom: 'clamp(52px, 6vw, 80px)' }}
     >
       <div
         className="mx-auto"
         style={{ maxWidth: 'var(--content-lg)', paddingInline: 'clamp(1.5rem, 5vw, 4rem)' }}
       >
 
-        {/* ── Section Header ────────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
+        {/* ── Section Header ─────────────────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-6">
           <div>
             <div className="eyebrow-row mb-[10px]">
-              <span
-                className="type-eyebrow"
-                style={{ color: 'var(--accent-stone)' }}
-              >
+              <span className="type-eyebrow" style={{ color: 'var(--accent-stone)' }}>
                 Market Insights
               </span>
             </div>
-            <h2
-              style={{ color: 'var(--text-primary)', marginBottom: '22px' }}
-            >
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '22px' }}>
               Understanding the Ibiza<br className="hidden sm:block" /> property market.
             </h2>
             <p
               className="type-body-sm"
               style={{
-                color: 'var(--text-secondary)',
-                lineHeight: 1.7,
-                maxWidth: '440px',
+                color:        'var(--text-secondary)',
+                lineHeight:   1.7,
+                maxWidth:     '440px',
                 marginBottom: 0,
               }}
             >
@@ -114,32 +107,26 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
           </Link>
         </div>
 
-        {/* ── Article Grid ──────────────────────────────────────────────── */}
+        {/* ── Article Grid ────────────────────────────────────────────────── */}
         {/*
           Desktop: 5-column grid
-            Featured article — left, col-span-3  (60%)
+            Featured article — left, col-span-3 (60%)
             Secondary stack  — right, col-span-2 (40%)
-
           Tablet/mobile: single column, featured first
         */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">
 
-          {/* ── Featured article ────────────────────────────── */}
+          {/* ── Featured article ──────────────────────────────────── */}
           {featured && (
             <Link
               href={`/blog/${featured.slug.current}`}
               className="group block no-underline lg:col-span-3 journal-card-hover"
               style={{
                 backgroundColor: 'var(--surface-primary)',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid var(--border-muted)',
+                border:          '1px solid var(--border-muted)',
               }}
             >
-              {/* Image — 3:2 editorial ratio */}
-              <div
-                className="relative overflow-hidden"
-                style={{ aspectRatio: '3/2' }}
-              >
+              <div className="relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
                 <Image
                   src={
                     featured.mainImage
@@ -156,7 +143,6 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                 />
               </div>
 
-              {/* Card text */}
               <div style={{ padding: 'clamp(24px, 3vw, 36px)' }}>
                 <span
                   className="type-eyebrow block mb-4"
@@ -172,7 +158,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                     fontWeight:    500,
                     lineHeight:    1.15,
                     letterSpacing: '-0.018em',
-                    marginBottom:  '18px',  /* clear title→body gap */
+                    marginBottom:  '18px',
                   }}
                 >
                   {featured.title}
@@ -196,10 +182,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                   className="flex items-center justify-between pt-5"
                   style={{ borderTop: '1px solid var(--border-muted)' }}
                 >
-                  <span
-                    className="type-caption"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
+                  <span className="type-caption" style={{ color: 'var(--text-tertiary)' }}>
                     {featured.publishedAt ? formatDate(featured.publishedAt) : ''}
                   </span>
                   <span
@@ -207,16 +190,14 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                     style={{ gap: '5px', color: 'var(--text-primary)' }}
                   >
                     Read Article
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">
-                      →
-                    </span>
+                    <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </span>
                 </div>
               </div>
             </Link>
           )}
 
-          {/* ── Secondary articles — stacked right ──────────── */}
+          {/* ── Secondary articles — stacked right ────────────── */}
           <div className="lg:col-span-2 flex flex-col gap-8 lg:gap-10">
             {secondary.slice(0, 2).map((post, i) => (
               <Link
@@ -225,15 +206,10 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                 className="group block no-underline journal-card-hover"
                 style={{
                   backgroundColor: 'var(--surface-primary)',
-                  borderRadius: 'var(--radius-sm)',
-                  border: '1px solid var(--border-muted)',
+                  border:          '1px solid var(--border-muted)',
                 }}
               >
-                {/* Image — 3:2 editorial ratio */}
-                <div
-                  className="relative overflow-hidden"
-                  style={{ aspectRatio: '3/2' }}
-                >
+                <div className="relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
                   <Image
                     src={
                       post.mainImage
@@ -249,7 +225,6 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                   />
                 </div>
 
-                {/* Card text — concise: category + title + date only */}
                 <div style={{ padding: 'clamp(20px, 2vw, 24px)' }}>
                   <span
                     className="type-eyebrow block mb-3"
@@ -261,7 +236,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                   <h4
                     className="font-serif heading-hover-sea"
                     style={{
-                      fontSize:      'clamp(1.125rem, 1.5vw, 1.3125rem)',  /* 18–21px */
+                      fontSize:      'clamp(1.125rem, 1.5vw, 1.3125rem)',
                       fontWeight:    500,
                       lineHeight:    1.25,
                       letterSpacing: '-0.012em',
@@ -271,10 +246,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                     {post.title}
                   </h4>
 
-                  <span
-                    className="type-caption"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
+                  <span className="type-caption" style={{ color: 'var(--text-tertiary)' }}>
                     {post.publishedAt ? formatDate(post.publishedAt) : ''}
                   </span>
                 </div>
@@ -284,16 +256,6 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
 
         </div>
 
-        {/* ── Bottom CTA ────────────────────────────────────────────────── */}
-        <div
-          className="flex justify-center mt-14"
-          style={{ borderTop: '1px solid var(--border-muted)', paddingTop: '44px' }}
-        >
-          <Link href="/blog" className="section-more-link">
-            Explore the full journal
-            <span className="block h-px bg-current" style={{ width: '24px' }} />
-          </Link>
-        </div>
 
       </div>
     </section>

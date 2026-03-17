@@ -59,12 +59,10 @@ export default function ContactPage() {
           backgroundColor: 'var(--bg-deep)',
           paddingTop:      'clamp(6rem, 10vw, 8rem)',
           paddingBottom:   'clamp(3rem, 5vw, 4rem)',
+          borderBottom:    '1px solid var(--border-dark)',
         }}
       >
-        <div
-          className="mx-auto"
-          style={{ maxWidth: 'var(--content-lg)', paddingInline: 'clamp(1.5rem, 5vw, 4rem)' }}
-        >
+        <div className="container-lg">
           <div className="eyebrow-row mb-[10px]">
             <span className="type-eyebrow" style={{ color: 'var(--accent-sand)' }}>Get in Touch</span>
           </div>
@@ -84,11 +82,8 @@ export default function ContactPage() {
       </div>
 
       {/* ── Body ───────────────────────────────────────────────────── */}
-      <div style={{ backgroundColor: 'var(--bg-canvas)', paddingBlock: 'clamp(3rem, 5vw, 5rem)' }}>
-        <div
-          className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16"
-          style={{ maxWidth: 'var(--content-lg)', paddingInline: 'clamp(1.5rem, 5vw, 4rem)' }}
-        >
+      <div className="section-major" style={{ backgroundColor: 'var(--bg-canvas)' }}>
+        <div className="container-lg grid grid-cols-1 lg:grid-cols-2 gap-16">
 
           {/* ── Form ─────────────────────────────────────────────── */}
           <div>
@@ -125,7 +120,7 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} noValidate>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="label-base">First Name</label>
                     <input
@@ -137,7 +132,7 @@ export default function ContactPage() {
                       style={errors.firstName ? { borderColor: ERROR_COLOR } : undefined}
                     />
                     {errors.firstName && (
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
+                      <p className="type-caption" style={{ color: ERROR_COLOR, marginTop: '4px' }}>
                         {errors.firstName}
                       </p>
                     )}
@@ -153,7 +148,7 @@ export default function ContactPage() {
                       style={errors.lastName ? { borderColor: ERROR_COLOR } : undefined}
                     />
                     {errors.lastName && (
-                      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
+                      <p className="type-caption" style={{ color: ERROR_COLOR, marginTop: '4px' }}>
                         {errors.lastName}
                       </p>
                     )}
@@ -172,7 +167,7 @@ export default function ContactPage() {
                     style={errors.email ? { borderColor: ERROR_COLOR } : undefined}
                   />
                   {errors.email && (
-                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
+                    <p className="type-caption" style={{ color: ERROR_COLOR, marginTop: '4px' }}>
                       {errors.email}
                     </p>
                   )}
@@ -227,7 +222,7 @@ export default function ContactPage() {
                     }}
                   />
                   {errors.message && (
-                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', color: ERROR_COLOR, marginTop: '4px' }}>
+                    <p className="type-caption" style={{ color: ERROR_COLOR, marginTop: '4px' }}>
                       {errors.message}
                     </p>
                   )}

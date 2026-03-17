@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { PortableText } from '@portabletext/react'
+import type { PortableTextComponents } from '@portabletext/react'
 import { client } from '../../../../sanity/lib/client'
 import { blogPostBySlugQuery, allBlogPostsQuery } from '../../../../sanity/lib/queries'
 import { urlFor } from '../../../../sanity/lib/image'
@@ -10,6 +11,134 @@ import type { BlogPost } from '../../../../types'
 import { BLOG_CATEGORY_LABELS } from '../../../../lib/constants'
 
 export const revalidate = 60
+
+// ─── On-brand PortableText renderer ──────────────────────────────────────────
+// Replaces the generic Tailwind `prose` class with design-system tokens so
+// article body copy matches every other editorial page on the site.
+
+const blogPtComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => (
+      <p
+        style={{
+          color:        'var(--text-secondary)',
+          lineHeight:   1.88,
+          marginBottom: '1.5rem',
+          fontFamily:   'var(--font-sans)',
+          fontSize:     'clamp(1rem, 1.5vw, 1.0625rem)',
+        }}
+      >
+        {children}
+      </p>
+    ),
+    h2: ({ children }) => (
+      <h2
+        className="font-serif"
+        style={{
+          color:         'var(--text-primary)',
+          fontSize:      'clamp(1.375rem, 2.2vw, 1.875rem)',
+          fontWeight:    500,
+          letterSpacing: '-0.02em',
+          lineHeight:    1.15,
+          marginTop:     'clamp(2.5rem, 4vw, 3.5rem)',
+          marginBottom:  '1rem',
+        }}
+      >
+        {children}
+      </h2>
+    ),
+    h3: ({ children }) => (
+      <h3
+        className="font-serif"
+        style={{
+          color:         'var(--text-primary)',
+          fontSize:      'clamp(1.125rem, 1.8vw, 1.375rem)',
+          fontWeight:    500,
+          letterSpacing: '-0.015em',
+          lineHeight:    1.2,
+          marginTop:     '2rem',
+          marginBottom:  '0.75rem',
+        }}
+      >
+        {children}
+      </h3>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote
+        style={{
+          borderLeft:  '3px solid var(--cta-primary-bg)',
+          paddingLeft: '1.5rem',
+          marginBlock: '2rem',
+          fontStyle:   'italic',
+          color:       'var(--text-secondary)',
+          lineHeight:  1.75,
+        }}
+      >
+        {children}
+      </blockquote>
+    ),
+  },
+  marks: {
+    strong: ({ children }) => (
+      <strong style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{children}</strong>
+    ),
+    em: ({ children }) => <em style={{ fontStyle: 'italic' }}>{children}</em>,
+    link: ({ children, value }) => (
+      <a
+        href={value?.href}
+        target={value?.href?.startsWith('http') ? '_blank' : undefined}
+        rel={value?.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+        style={{
+          color:           'var(--cta-primary-bg)',
+          textDecoration:  'none',
+          borderBottom:    '1px solid rgba(200,110,74,0.35)',
+          paddingBottom:   '1px',
+          transition:      'border-color 150ms ease',
+        }}
+      >
+        {children}
+      </a>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => (
+      <ul style={{ paddingLeft: '1.375rem', marginBottom: '1.5rem' }}>{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem' }}>{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => (
+      <li
+        style={{
+          color:        'var(--text-secondary)',
+          fontFamily:   'var(--font-sans)',
+          fontSize:     'clamp(1rem, 1.5vw, 1.0625rem)',
+          lineHeight:   1.75,
+          marginBottom: '0.5rem',
+          paddingLeft:  '0.25rem',
+        }}
+      >
+        {children}
+      </li>
+    ),
+    number: ({ children }) => (
+      <li
+        style={{
+          color:        'var(--text-secondary)',
+          fontFamily:   'var(--font-sans)',
+          fontSize:     'clamp(1rem, 1.5vw, 1.0625rem)',
+          lineHeight:   1.75,
+          marginBottom: '0.5rem',
+          paddingLeft:  '0.25rem',
+        }}
+      >
+        {children}
+      </li>
+    ),
+  },
+}
 
 export async function generateStaticParams() {
   const posts: BlogPost[] = await client.fetch(allBlogPostsQuery).catch(() => [])
@@ -152,8 +281,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </p>
           )}
           {post.body && (
-            <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-light prose-a:no-underline prose-strong:font-medium">
-              <PortableText value={post.body} />
+            <div>
+              <PortableText value={post.body} components={blogPtComponents} />
             </div>
           )}
 
@@ -169,10 +298,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <h3
               className="font-serif"
               style={{
-                color:        'var(--text-on-dark)',
-                fontWeight:   400,
-                marginBottom: '0.75rem',
-                fontSize:     'clamp(1.375rem, 2.5vw, 1.75rem)',
+                color:         'var(--text-on-dark)',
+                fontWeight:    500,
+                letterSpacing: '-0.02em',
+                lineHeight:    1.15,
+                marginBottom:  '0.75rem',
+                fontSize:      'clamp(1.375rem, 2.5vw, 1.75rem)',
               }}
             >
               Looking for a property in Ibiza?

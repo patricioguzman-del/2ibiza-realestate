@@ -20,8 +20,9 @@ export type PropertyType   = 'villa' | 'finca' | 'apartment' | 'penthouse' | 'pl
 // ─── Shared area reference (used inside property objects) ────────────────────
 
 export interface AreaRef {
-  name: string
-  slug?: SanitySlug
+  name:     string
+  slug?:    SanitySlug
+  summary?: string
 }
 
 // ─── Property — listing shape (cards, grids, search results) ────────────────

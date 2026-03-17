@@ -14,27 +14,6 @@ const NAV_LINKS = [
   { href: '/sell',       label: 'Sell'       },
 ]
 
-const PROPERTIES_DROPDOWN = [
-  { href: '/properties',                      label: 'All Properties'   },
-  { href: '/properties?type=villa',           label: 'Villas'           },
-  { href: '/properties?type=apartment',       label: 'Apartments'       },
-  { href: '/properties?type=finca',           label: 'Fincas'           },
-  { href: '/properties?type=new-development', label: 'New Developments' },
-]
-
-const AREAS_DROPDOWN = [
-  { href: '/areas/ibiza',         label: 'Ibiza'         },
-  { href: '/areas/santa-eulalia', label: 'Santa Eulalia' },
-  { href: '/areas/san-jose',      label: 'San José'      },
-  { href: '/areas/san-antonio',   label: 'San Antonio'   },
-  { href: '/areas/san-juan',      label: 'San Juan'      },
-]
-
-const DROPDOWN_MAP: Record<string, typeof PROPERTIES_DROPDOWN> = {
-  '/properties': PROPERTIES_DROPDOWN,
-  '/areas':      AREAS_DROPDOWN,
-}
-
 // ─── Top bar height (used to offset the main nav) ────────────────────────────
 
 const TOPBAR_HEIGHT = 36 // px
@@ -195,56 +174,7 @@ export default function Navbar() {
             {/* Nav links */}
             <ul className="flex items-center gap-7 list-none m-0 p-0" role="list">
               {NAV_LINKS.map(link => {
-                const dropdown = DROPDOWN_MAP[link.href]
                 const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
-
-                if (dropdown) {
-                  return (
-                    <li key={link.href} className="relative group">
-                      <Link
-                        href={link.href}
-                        className={`nav-link flex items-center gap-1 ${isActive ? 'nav-link-active' : ''}`}
-                        aria-haspopup="true"
-                        aria-expanded={undefined}
-                      >
-                        {link.label}
-                        <span style={{ fontSize: '8px', opacity: 0.45, lineHeight: 1 }} aria-hidden="true">▾</span>
-                      </Link>
-
-                      {/* Dropdown opens on hover OR keyboard focus-within */}
-                      <div
-                        className="absolute top-full left-0 pt-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all"
-                        style={{ transitionDuration: '180ms', transitionTimingFunction: 'ease' }}
-                      >
-                        <div
-                          role="menu"
-                          aria-label={`${link.label} submenu`}
-                          style={{
-                            backgroundColor: 'var(--surface-primary)',
-                            borderRadius:    'var(--radius-sm)',
-                            border:          '1px solid var(--border-muted)',
-                            borderTop:       '2px solid var(--cta-primary-bg)',
-                            boxShadow:       '0 8px 24px rgba(47,58,55,0.10), 0 2px 6px rgba(47,58,55,0.05)',
-                            paddingBlock:    '8px',
-                            minWidth:        '188px',
-                          }}
-                        >
-                          {dropdown.map(item => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              className="dropdown-link"
-                              role="menuitem"
-                            >
-                              {item.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </li>
-                  )
-                }
-
                 return (
                   <li key={link.href}>
                     <Link

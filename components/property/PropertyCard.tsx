@@ -6,9 +6,20 @@ import { PROPERTY_TYPE_LABELS } from '../../lib/constants'
 
 const BLUR_DARK = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 3\'%3E%3Crect fill=\'%232F3A37\' width=\'4\' height=\'3\'/%3E%3C/svg%3E'
 
+// Six varied luxury property fallbacks — rotated by card index
+const FALLBACK_IMAGES = [
+  'https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&h=600&fit=crop',
+]
+
 interface PropertyCardProps {
-  property: PropertyListItem
+  property:  PropertyListItem
   priority?: boolean
+  index?:    number
 }
 
 function formatPrice(price?: number, priceOnRequest?: boolean): string {
@@ -34,10 +45,10 @@ function typeLabel(type?: string): string {
   return PROPERTY_TYPE_LABELS[type] ?? type.charAt(0).toUpperCase() + type.slice(1)
 }
 
-export default function PropertyCard({ property, priority }: PropertyCardProps) {
+export default function PropertyCard({ property, priority, index = 0 }: PropertyCardProps) {
   const imageUrl = property.heroImage
     ? urlFor(property.heroImage).width(960).height(720).fit('crop').url()
-    : 'https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?w=800&h=600&fit=crop'
+    : FALLBACK_IMAGES[index % FALLBACK_IMAGES.length]
 
   const attrs   = buildAttrs(property)
   const typeLbl = typeLabel(property.propertyType)
@@ -45,10 +56,12 @@ export default function PropertyCard({ property, priority }: PropertyCardProps) 
   return (
     <Link
       href={`/properties/${property.slug.current}`}
-      className="group block no-underline property-card-hover"
+      className="group no-underline property-card-hover"
       style={{
         backgroundColor: 'var(--surface-primary)',
         border:          '1px solid var(--border-muted)',
+        display:         'flex',
+        flexDirection:   'column',
       }}
     >
       {/* ── Image ──────────────────────────────────────────────────── */}
@@ -80,7 +93,7 @@ export default function PropertyCard({ property, priority }: PropertyCardProps) 
           style={{ backgroundColor: 'rgba(47,58,55,0.12)' }}
         />
 
-        {/* Status / exclusive badges — left */}
+        {/* ── Left badges — max 2: Exclusive first, then Under Offer ── */}
         <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-10">
           {property.exclusive && (
             <span
@@ -110,27 +123,9 @@ export default function PropertyCard({ property, priority }: PropertyCardProps) 
               Under Offer
             </span>
           )}
-          {property.hasTouristLicense && (
-            <span
-              className="type-caption"
-              style={{
-                backgroundColor:     'rgba(47,58,55,0.52)',
-                backdropFilter:      'blur(6px)',
-                WebkitBackdropFilter:'blur(6px)',
-                border:              '1px solid rgba(245,240,232,0.25)',
-                color:               'var(--text-on-dark)',
-                padding:             '4px 10px',
-                letterSpacing:       '0.12em',
-                textTransform:       'uppercase',
-                whiteSpace:          'nowrap',
-              }}
-            >
-              Tourist Lic.
-            </span>
-          )}
         </div>
 
-        {/* Property type badge — right */}
+        {/* ── Property type badge — right ────────────────────────── */}
         {typeLbl && (
           <div
             className="absolute top-4 right-4 z-10"
@@ -153,9 +148,9 @@ export default function PropertyCard({ property, priority }: PropertyCardProps) 
       </div>
 
       {/* ── Info block ─────────────────────────────────────────────── */}
-      <div style={{ padding: '20px 24px 24px' }}>
+      <div style={{ padding: '20px 24px 24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
 
-        {property.area && (
+        {(property.neighborhood || property.area) && (
           <p
             className="type-eyebrow"
             style={{
@@ -164,11 +159,12 @@ export default function PropertyCard({ property, priority }: PropertyCardProps) 
               marginBottom:  '7px',
             }}
           >
-            {property.area.name}
-            {property.neighborhood && (
+            {/* Neighbourhood is primary; area is the muted secondary context */}
+            {property.neighborhood ?? property.area?.name}
+            {property.neighborhood && property.area && (
               <>
-                <span style={{ opacity: 0.4, margin: '0 6px' }}>·</span>
-                <span style={{ opacity: 0.72 }}>{property.neighborhood}</span>
+                <span style={{ opacity: 0.3, margin: '0 6px' }}>·</span>
+                <span style={{ opacity: 0.48, letterSpacing: '0.10em' }}>{property.area.name}</span>
               </>
             )}
           </p>
@@ -201,35 +197,67 @@ export default function PropertyCard({ property, priority }: PropertyCardProps) 
           </p>
         )}
 
-        <div
-          style={{
-            height:          '1px',
-            backgroundColor: 'var(--border-muted)',
-            margin:          '18px 0',
-          }}
-        />
-
-        <div className="flex items-center justify-between">
-          <span
+        {/* Tourist licence — inline attribute, not a badge */}
+        {property.hasTouristLicense && (
+          <p
+            className="type-caption"
             style={{
-              fontFamily:    'var(--font-sans)',
-              fontSize:      '1.25rem',
-              fontWeight:    600,
-              color:         'var(--text-primary)',
-              letterSpacing: '-0.01em',
-              lineHeight:    1,
+              color:         'var(--accent-sea)',
+              letterSpacing: '0.10em',
+              textTransform: 'uppercase',
+              marginTop:     '8px',
+              marginBottom:  0,
+              display:       'flex',
+              alignItems:    'center',
+              gap:           '5px',
             }}
           >
-            {formatPrice(property.price, property.priceOnRequest)}
-          </span>
+            <span
+              style={{
+                display:         'inline-block',
+                width:           '5px',
+                height:          '5px',
+                borderRadius:    '50%',
+                backgroundColor: 'currentColor',
+                flexShrink:      0,
+              }}
+            />
+            Tourist Licence
+          </p>
+        )}
 
-          <span
-            className="flex items-center gap-1 type-btn transition-transform duration-200 group-hover:translate-x-1"
-            style={{ color: 'var(--cta-primary-bg)' }}
-          >
-            View
-            <span style={{ fontSize: '13px' }}>→</span>
-          </span>
+        {/* ── Price row — pinned to bottom of card ────────────────── */}
+        <div style={{ marginTop: 'auto' }}>
+          <div
+            style={{
+              height:          '1px',
+              backgroundColor: 'var(--border-muted)',
+              margin:          '18px 0',
+            }}
+          />
+
+          <div className="flex items-center justify-between">
+            <span
+              style={{
+                fontFamily:    'var(--font-sans)',
+                fontSize:      '1.25rem',
+                fontWeight:    600,
+                color:         'var(--text-primary)',
+                letterSpacing: '-0.01em',
+                lineHeight:    1,
+              }}
+            >
+              {formatPrice(property.price, property.priceOnRequest)}
+            </span>
+
+            <span
+              className="flex items-center gap-1.5 type-btn transition-transform duration-200 group-hover:translate-x-1"
+              style={{ color: 'var(--cta-primary-bg)' }}
+            >
+              View Property
+              <span style={{ fontSize: '13px' }}>→</span>
+            </span>
+          </div>
         </div>
 
       </div>

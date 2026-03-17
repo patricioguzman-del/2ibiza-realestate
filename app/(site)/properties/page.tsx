@@ -22,7 +22,11 @@ export default async function PropertiesPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Our Portfolio" title="Properties" />
+      <PageHeader
+        eyebrow="Our Portfolio"
+        title="Properties"
+        subtitle="A curated collection of villas, fincas, apartments and penthouses across Ibiza's finest locations."
+      />
 
       <Suspense
         fallback={

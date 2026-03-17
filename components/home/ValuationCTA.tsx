@@ -418,7 +418,7 @@ function SuccessState() {
           marginBottom:    '24px',
         }}
       >
-        <span style={{ color: '#fff', fontSize: '20px', lineHeight: 1 }}>✓</span>
+        <span style={{ color: 'var(--text-on-dark)', fontSize: '20px', lineHeight: 1 }}>✓</span>
       </div>
 
       <h3

@@ -97,7 +97,7 @@ export default function FeaturedListings({ properties }: FeaturedListingsProps) 
   return (
     <section
       className="section-major"
-      style={{ backgroundColor: 'var(--bg-canvas-soft)' }}
+      style={{ backgroundColor: 'var(--bg-canvas-soft)', paddingBottom: 'clamp(52px, 6vw, 80px)' }}
     >
       <div
         className="mx-auto"
@@ -113,9 +113,17 @@ export default function FeaturedListings({ properties }: FeaturedListingsProps) 
           className="flex items-end justify-between gap-6 flex-wrap"
           style={{ marginBottom: 'clamp(2.5rem, 4.5vw, 3.5rem)' }}
         >
-          <h2 style={{ color: 'var(--text-primary)', marginBottom: 0 }}>
-            Featured Properties
-          </h2>
+          <div>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: '8px' }}>
+              Featured Properties
+            </h2>
+            <p
+              className="type-body-sm"
+              style={{ color: 'var(--text-secondary)', marginBottom: 0 }}
+            >
+              A curated selection of current listings across Ibiza.
+            </p>
+          </div>
           <Link href="/properties" className="section-more-link shrink-0">
             View All Properties
             <span className="block h-px bg-current" style={{ width: '24px' }} />
@@ -232,8 +240,8 @@ export default function FeaturedListings({ properties }: FeaturedListingsProps) 
                   {/* ── Info block ────────────────────────────────────── */}
                   <div style={{ padding: '20px 24px 24px' }}>
 
-                    {/* Location — accent-stone, not terracotta */}
-                    {property.area && (
+                    {/* Location — neighbourhood primary, area secondary */}
+                    {(property.neighborhood || property.area) && (
                       <p
                         className="type-eyebrow"
                         style={{
@@ -242,11 +250,11 @@ export default function FeaturedListings({ properties }: FeaturedListingsProps) 
                           marginBottom:  '7px',
                         }}
                       >
-                        {property.area.name}
-                        {property.neighborhood && (
+                        {property.neighborhood ?? property.area?.name}
+                        {property.neighborhood && property.area && (
                           <>
-                            <span style={{ opacity: 0.4, margin: '0 6px' }}>·</span>
-                            <span style={{ opacity: 0.72 }}>{property.neighborhood}</span>
+                            <span style={{ opacity: 0.3, margin: '0 6px' }}>·</span>
+                            <span style={{ opacity: 0.48, letterSpacing: '0.10em' }}>{property.area.name}</span>
                           </>
                         )}
                       </p>

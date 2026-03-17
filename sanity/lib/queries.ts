@@ -52,7 +52,7 @@ export const propertyDetailQuery = groq`
     images,
     hasTouristLicense, offMarket,
     publishedAt,
-    area->{ name, slug },
+    area->{ name, slug, summary },
     neighborhood,
     coordinates,
     "related": *[_type == "property" && area._ref == ^.area._ref && slug.current != $slug] | order(publishedAt desc)[0...3] {
@@ -90,7 +90,8 @@ export const allBlogPostsQuery = groq`
     _id, title, slug, category,
     author, publishedAt,
     mainImage, excerpt,
-    featured
+    featured,
+    "readTime": round(length(pt::text(body)) / 200)
   }
 `
 

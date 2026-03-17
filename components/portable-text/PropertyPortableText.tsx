@@ -26,7 +26,9 @@ export const propertyPtComponents: PortableTextComponents = {
         className="font-serif"
         style={{
           color:        'var(--text-primary)',
+          fontSize:     'clamp(1.375rem, 2.2vw, 1.75rem)',
           fontWeight:   500,
+          letterSpacing: '-0.02em',
           marginBottom: '16px',
           marginTop:    '32px',
         }}
