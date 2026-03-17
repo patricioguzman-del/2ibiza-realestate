@@ -14,7 +14,6 @@ export const CONTACT = {
 // Shared between Hero search card and PropertiesClient filter bar.
 
 export const BUDGET_OPTIONS = [
-  { value: '500000',   label: 'Under €500k' },
   { value: '1000000',  label: 'Under €1M'   },
   { value: '2000000',  label: 'Under €2M'   },
   { value: '5000000',  label: 'Under €5M'   },

@@ -12,7 +12,7 @@ const HEADLINE_WORDS = ['Ibiza', 'property,', 'found', 'privately.']
 
 const AREAS = [
   'Ibiza Town', 'Santa Eulalia', 'San José',
-  'Santa Gertrudis', 'North Ibiza', 'Es Cubells',
+  'Santa Gertrudis', 'North Ibiza',
 ]
 
 const TYPES = Object.values(PROPERTY_TYPE_LABELS)
