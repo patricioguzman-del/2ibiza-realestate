@@ -290,10 +290,10 @@ export default function PropertiesClient({ initialProperties, areas }: Propertie
     <div style={{ backgroundColor: 'var(--bg-canvas-soft)', minHeight: '100vh' }}>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* DESKTOP FILTER BAR (lg+) — single editorial row                    */}
+      {/* DESKTOP FILTER BAR (md+) — single editorial row                    */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <div
-        className="hidden lg:block"
+        className="hidden md:block"
         style={{
           backgroundColor: 'var(--surface-primary)',
           borderTop:       '1px solid var(--border-muted)',
@@ -473,10 +473,10 @@ export default function PropertiesClient({ initialProperties, areas }: Propertie
       </div>
 
       {/* ─────────────────────────────────────────────────────────────────── */}
-      {/* MOBILE FILTER BAR (< lg)                                           */}
+      {/* MOBILE FILTER BAR (< md)                                           */}
       {/* ─────────────────────────────────────────────────────────────────── */}
       <div
-        className="lg:hidden"
+        className="md:hidden"
         style={{
           backgroundColor: 'var(--surface-primary)',
           borderTop:       '1px solid var(--border-muted)',

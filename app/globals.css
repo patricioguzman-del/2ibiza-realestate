@@ -347,6 +347,35 @@ video {
   outline-offset: 2px;
 }
 
+/* Buttons — offset outward so the ring clears the border */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost-dark:focus-visible,
+.nav-enquire:focus-visible {
+  outline: 2px solid var(--accent-sea);
+  outline-offset: 3px;
+}
+
+/* Nav links — ring sits just below the underline */
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent-sea);
+  outline-offset: 4px;
+  border-radius: 0;
+}
+
+/* Hero & filter selects — inset ring so it doesn't expand the layout */
+.hero-search-panel-select:focus-visible,
+.hero-search-panel-btn:focus-visible {
+  outline: 2px solid var(--accent-sea);
+  outline-offset: -2px;
+}
+
+/* Mobile menu items */
+.mobile-menu-link:focus-visible {
+  outline: 2px solid var(--accent-sea);
+  outline-offset: 4px;
+}
+
 /* ─── Layout Utilities ───────────────────────────────────────────────────── */
 
 .container-md {
@@ -440,6 +469,42 @@ video {
 }
 
 /* ─── Typography Utility Classes ─────────────────────────────────────────── */
+
+/*
+  Heading scale — use these for section headings across all inner pages.
+  Hero display h1 uses its own inline clamp for max creative control.
+*/
+.type-display {
+  font-family:    var(--font-serif);
+  font-size:      clamp(2.75rem, 5vw, 4.5rem);
+  font-weight:    500;
+  line-height:    1.0;
+  letter-spacing: -0.03em;
+}
+
+.type-h1 {
+  font-family:    var(--font-serif);
+  font-size:      clamp(2.25rem, 4vw, 3.5rem);
+  font-weight:    500;
+  line-height:    1.1;
+  letter-spacing: -0.025em;
+}
+
+.type-h2 {
+  font-family:    var(--font-serif);
+  font-size:      clamp(1.75rem, 3vw, 2.5rem);
+  font-weight:    500;
+  line-height:    1.15;
+  letter-spacing: -0.02em;
+}
+
+.type-h3 {
+  font-family:    var(--font-serif);
+  font-size:      clamp(1.25rem, 2vw, 1.75rem);
+  font-weight:    500;
+  line-height:    1.2;
+  letter-spacing: -0.015em;
+}
 
 /* ─── Word-mask (hero H1 clip reveal) ───────────────────────────────────── */
 
@@ -551,32 +616,7 @@ video {
   color: var(--cta-primary-text);
 }
 
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background-color: transparent;
-  color: var(--cta-secondary-text);
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 14px 30px;
-  border-radius: 0;          /* zero — enforced per brand guidelines */
-  border: 1px solid var(--cta-secondary-border);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color var(--transition-ui), color var(--transition-ui);
-}
-
-.btn-secondary:hover {
-  background-color: var(--cta-primary-bg);
-  color: var(--cta-primary-text);
-}
-
-/* Ghost button — light section context */
+.btn-secondary,
 .btn-ghost-dark {
   display: inline-flex;
   align-items: center;
@@ -591,15 +631,16 @@ video {
   text-transform: uppercase;
   padding: 14px 30px;
   border-radius: 0;          /* zero — enforced per brand guidelines */
-  border: 1.5px solid rgba(20, 20, 19, 0.30);
+  border: 1.5px solid rgba(20, 20, 19, 0.28);
   cursor: pointer;
   text-decoration: none;
   transition: background-color var(--transition-ui), border-color var(--transition-ui), color var(--transition-ui);
 }
 
+.btn-secondary:hover,
 .btn-ghost-dark:hover {
-  background-color: rgba(20, 20, 19, 0.06);
-  border-color: rgba(20, 20, 19, 0.60);
+  background-color: rgba(20, 20, 19, 0.05);
+  border-color: rgba(20, 20, 19, 0.55);
   color: var(--text-primary);
 }
 
@@ -980,7 +1021,7 @@ video {
   color: rgba(250, 249, 245, 1);
 }
 
-/* Section "more" link — previously dark, now light section context */
+/* section-more-link-dark is now identical to section-more-link — kept as alias */
 .section-more-link-dark {
   display: flex;
   align-items: center;
@@ -990,13 +1031,13 @@ video {
   font-weight: 500;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
   transition: color var(--transition-ui);
   flex-shrink: 0;
 }
 .section-more-link-dark:hover {
-  color: var(--text-primary);
+  color: var(--cta-primary-bg);
 }
 
 /* ─── Light-section form labels (previously dark-surface) ────────────────── */
