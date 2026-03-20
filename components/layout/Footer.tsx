@@ -145,6 +145,7 @@ export default function Footer() {
                   href={href}
                   className="hover-on-dark-gold"
                   aria-label={label}
+                  title={label}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: 'var(--text-secondary)', display: 'flex' }}

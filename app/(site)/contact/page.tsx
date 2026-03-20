@@ -30,7 +30,7 @@ const CONTACT_INFO = [
   { label: 'WhatsApp',   value: '+34 6XX XXX XXX'  },
 ]
 
-const ERROR_COLOR = 'rgba(185,60,60,0.6)'
+const ERROR_COLOR = 'var(--error)'
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)

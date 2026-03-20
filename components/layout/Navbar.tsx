@@ -54,6 +54,12 @@ export default function Navbar() {
     }
   }, [menuOpen])
 
+  // Body scroll lock when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
   // Close mobile menu on Escape
   useEffect(() => {
     if (!menuOpen) return
@@ -272,7 +278,7 @@ export default function Navbar() {
               <li
                 key={link.href}
                 className={`transition-all duration-500 ${menuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
-                style={{ transitionDelay: `${i * 60}ms` }}
+                style={{ transitionDelay: `${i * 35}ms` }}
               >
                 <Link
                   ref={i === 0 ? firstMobileLinkRef : undefined}

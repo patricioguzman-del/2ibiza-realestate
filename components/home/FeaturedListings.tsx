@@ -186,32 +186,10 @@ export default function FeaturedListings({ properties }: FeaturedListingsProps) 
                     {/* Status / exclusive badges — left */}
                     <div className="absolute top-4 left-4 flex gap-2 z-10">
                       {property.exclusive && (
-                        <span
-                          className="type-caption"
-                          style={{
-                            backgroundColor: 'var(--cta-primary-bg)',
-                            color:           'var(--cta-primary-text)',
-                            padding:         '4px 10px',
-                            letterSpacing:   '0.12em',
-                            textTransform:   'uppercase',
-                          }}
-                        >
-                          Exclusive
-                        </span>
+                        <span className="badge badge-exclusive">Exclusive</span>
                       )}
                       {property.status === 'under-offer' && (
-                        <span
-                          className="type-caption"
-                          style={{
-                            backgroundColor: 'var(--accent-sea)',
-                            color:           'var(--text-on-dark)',
-                            padding:         '4px 10px',
-                            letterSpacing:   '0.12em',
-                            textTransform:   'uppercase',
-                          }}
-                        >
-                          Under Offer
-                        </span>
+                        <span className="badge badge-offered">Under Offer</span>
                       )}
                     </div>
 

@@ -96,32 +96,10 @@ export default function PropertyCard({ property, priority, index = 0 }: Property
         {/* ── Left badges — max 2: Exclusive first, then Under Offer ── */}
         <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-10">
           {property.exclusive && (
-            <span
-              className="type-caption"
-              style={{
-                backgroundColor: 'var(--cta-primary-bg)',
-                color:           'var(--cta-primary-text)',
-                padding:         '4px 10px',
-                letterSpacing:   '0.12em',
-                textTransform:   'uppercase',
-              }}
-            >
-              Exclusive
-            </span>
+            <span className="badge badge-exclusive">Exclusive</span>
           )}
           {property.status === 'under-offer' && (
-            <span
-              className="type-caption"
-              style={{
-                backgroundColor: 'var(--accent-sea)',
-                color:           'var(--text-on-dark)',
-                padding:         '4px 10px',
-                letterSpacing:   '0.12em',
-                textTransform:   'uppercase',
-              }}
-            >
-              Under Offer
-            </span>
+            <span className="badge badge-offered">Under Offer</span>
           )}
         </div>
 

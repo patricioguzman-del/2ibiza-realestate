@@ -412,8 +412,8 @@ function SuccessState() {
       <div
         className="mx-auto flex items-center justify-center"
         style={{
-          width:           '48px',
-          height:          '48px',
+          width:           '44px',
+          height:          '44px',
           backgroundColor: 'var(--cta-primary-bg)',
           marginBottom:    '24px',
         }}

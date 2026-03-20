@@ -49,7 +49,7 @@ export default function EnquiryForm({ propertyTitle, dark = false }: EnquiryForm
   const labelClass  = dark ? 'label-dark'  : 'label-base'
   const headingColor = dark ? 'var(--text-on-dark)' : 'var(--text-primary)'
   const privacyColor = dark ? 'rgba(245,240,232,0.62)' : 'var(--text-tertiary)'
-  const errorColor   = dark ? '#fca5a5' : '#dc2626'
+  const errorColor   = 'var(--error)'
 
   if (submitted) {
     return (

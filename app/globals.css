@@ -49,6 +49,10 @@
   --error:   #A4584A;
   --info:    #4A6D7B;
 
+  /* ── Badge status tokens ── */
+  --status-exclusive: var(--cta-primary-bg);   /* terracotta — premium/exclusive listings */
+  --status-offered:   #4a7ba8;                 /* mid blue — under offer */
+
   /* ── Overlays ── */
   --overlay-dark-soft:      rgba(20, 20, 19, 0.18);   /* Lighter image overlays */
   --overlay-dark-medium:    rgba(20, 20, 19, 0.30);
@@ -643,6 +647,35 @@ video {
   border-color: rgba(20, 20, 19, 0.55);
   color: var(--text-primary);
 }
+
+/* ─── Badge System ───────────────────────────────────────────────────────── */
+
+.badge {
+  display:        inline-block;
+  font-family:    var(--font-sans);
+  font-size:      11px;
+  font-weight:    500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height:    1;
+  padding:        4px 10px;
+  color:          #ffffff;
+}
+
+.badge-exclusive { background-color: var(--status-exclusive); }
+.badge-offered   { background-color: var(--status-offered); }
+
+/* ─── Form Error State ───────────────────────────────────────────────────── */
+
+.form-error-text {
+  font-family: var(--font-sans);
+  font-size:   12px;
+  color:       var(--error);
+  margin-top:  6px;
+}
+
+.input-base.input-has-error  { border-color:        var(--error); }
+.input-dark.input-has-error  { border-bottom-color: var(--error); }
 
 /* ─── Card Base Styles ───────────────────────────────────────────────────── */
 
