@@ -73,7 +73,7 @@ export default function PageHeader({ eyebrow, title, subtitle, imageUrl }: PageH
               <p
                 className="type-body"
                 style={{
-                  color:     'rgba(245,240,232,0.76)',
+                  color:     'var(--text-secondary)',
                   marginTop: '16px',
                   maxWidth:  '56ch',
                 }}
@@ -107,7 +107,7 @@ export default function PageHeader({ eyebrow, title, subtitle, imageUrl }: PageH
           <p
             className="type-body"
             style={{
-              color:     'rgba(245,240,232,0.76)',
+              color:     'var(--text-secondary)',
               marginTop: '16px',
               maxWidth:  '60ch',
             }}

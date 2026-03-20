@@ -9,25 +9,25 @@
   --bg-canvas:        #faf9f5;   /* Claude Light — primary page background */
   --bg-canvas-soft:   #faf9f5;   /* Claude Light — same */
   --bg-section-muted: #e8e6dc;   /* Claude Light Gray — subtle alternating sections */
-  --bg-deep:          #141413;   /* Near-black warm — dark sections (footer, hero, CTAs) */
-  --bg-deep-soft:     #1e1d1b;   /* Slightly lighter dark — hover variant on dark sections */
+  --bg-deep:          #e8e6dc;   /* Warm sand — light sections */
+  --bg-deep-soft:     #d8d6cc;   /* Slightly deeper sand */
 
   /* ── Surfaces ── */
   --surface-primary:   #FFFFFF;              /* Pure White — cards, forms */
   --surface-secondary: #e8e6dc;             /* Claude Light Gray — secondary surfaces */
-  --surface-dark:      #1e1d1b;             /* Dark surface — panels on dark sections */
+  --surface-dark:      #d8d6cc;             /* Sand surface */
   --surface-glass:     rgba(255, 255, 255, 0.82);
 
   /* ── Text ── */
   --text-primary:       #3c3a38;   /* Warm soft dark — readable without harshness (10:1 on canvas) */
   --text-secondary:     #636160;   /* Medium warm gray — WCAG AA on all backgrounds (5.9:1) */
   --text-tertiary:      #7e7c79;   /* Light warm gray — labels + captions only (large text) */
-  --text-on-dark:       rgba(250, 249, 245, 0.95);   /* Near-white — primary text on dark sections */
-  --text-on-dark-muted: rgba(250, 249, 245, 0.68);   /* Muted light — secondary text on dark sections */
+  --text-on-dark:       #3c3a38;   /* Dark warm text — readable on sand */
+  --text-on-dark-muted: #636160;   /* Medium dark — secondary text on sand */
 
   /* ── Accents ── */
   --accent-sea:   #6a9bcc;   /* Claude Blue — hover states, focus rings */
-  --accent-sand:  rgba(250, 249, 245, 0.55);   /* Muted cream — eyebrow labels on dark sections */
+  --accent-sand:  #9a8872;   /* Warm brown — visible eyebrow label on sand bg */
   --accent-stone: #b0aea5;   /* Claude Mid Gray */
   --accent-olive: #788c5d;   /* Claude Green */
 

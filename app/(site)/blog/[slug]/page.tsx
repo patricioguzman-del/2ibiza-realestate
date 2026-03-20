@@ -310,7 +310,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </h3>
             <p
               className="type-body-sm"
-              style={{ color: 'rgba(245,240,232,0.76)', marginBottom: '1.75rem' }}
+              style={{ color: 'var(--text-secondary)', marginBottom: '1.75rem' }}
             >
               Browse our curated collection of villas, fincas and apartments.
             </p>

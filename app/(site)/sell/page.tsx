@@ -206,7 +206,7 @@ export default function SellPage() {
             <p
               className="type-body"
               style={{
-                color:     'rgba(245,240,232,0.80)',
+                color:     'var(--text-secondary)',
                 lineHeight: 1.75,
                 maxWidth:  '46ch',
               }}
@@ -403,7 +403,7 @@ export default function SellPage() {
               <p
                 className="type-body"
                 style={{
-                  color:        'rgba(245,240,232,0.76)',
+                  color:        'var(--text-secondary)',
                   lineHeight:   1.78,
                   maxWidth:     '44ch',
                   marginBottom: '52px',
@@ -464,7 +464,7 @@ export default function SellPage() {
                         <p
                           className="type-body-sm"
                           style={{
-                            color:        'rgba(245,240,232,0.62)',
+                            color:        'var(--text-secondary)',
                             lineHeight:   1.7,
                             marginBottom: 0,
                           }}

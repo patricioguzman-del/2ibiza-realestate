@@ -121,7 +121,7 @@ export default async function AreasPage() {
           {/* Fix #6: More evocative copy — speaks to lifestyle, not just geography */}
           <p
             className="type-body"
-            style={{ color: 'rgba(245,240,232,0.72)', maxWidth: '58ch', lineHeight: 1.8 }}
+            style={{ color: 'var(--text-secondary)', maxWidth: '58ch', lineHeight: 1.8 }}
           >
             Every corner of the island carries its own distinct character — from the ancient
             walls and marina of Ibiza Town to the wild silence of the unspoiled north.
@@ -281,7 +281,7 @@ export default async function AreasPage() {
               <p
                 className="type-body-sm"
                 style={{
-                  color:         'rgba(245,240,232,0.60)',
+                  color:         'var(--text-secondary)',
                   lineHeight:    1.75,
                   marginBottom:  '1.75rem',
                 }}
@@ -342,7 +342,7 @@ export default async function AreasPage() {
               </h2>
               <p
                 className="type-body-sm"
-                style={{ color: 'rgba(245,240,232,0.65)', lineHeight: 1.8, marginBottom: 0 }}
+                style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 0 }}
               >
                 Browse our curated portfolio of villas, fincas and apartments — or speak
                 directly with an advisor who can match you to properties that fit your

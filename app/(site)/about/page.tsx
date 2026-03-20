@@ -76,7 +76,7 @@ export default async function AboutPage() {
           <p
             className="type-body"
             style={{
-              color:     'rgba(245,240,232,0.68)',
+              color:     'var(--text-secondary)',
               maxWidth:  '460px',
               marginTop: '1.25rem',
             }}
@@ -337,7 +337,7 @@ export default async function AboutPage() {
           <p
             className="type-body"
             style={{
-              color:        'rgba(245,240,232,0.68)',
+              color:        'var(--text-secondary)',
               maxWidth:     '480px',
               lineHeight:   1.75,
               marginBottom: '2.5rem',

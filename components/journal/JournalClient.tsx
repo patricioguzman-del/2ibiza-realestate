@@ -429,7 +429,7 @@ export default function JournalClient({ posts }: Props) {
                   <p
                     className="type-body-sm"
                     style={{
-                      color:         'rgba(245,240,232,0.60)',
+                      color:         'var(--text-secondary)',
                       lineHeight:    1.75,
                       marginBottom:  '1.5rem',
                     }}

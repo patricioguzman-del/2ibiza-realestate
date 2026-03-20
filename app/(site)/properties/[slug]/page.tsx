@@ -208,7 +208,7 @@ export default async function PropertyDetailPage(
             justifyContent:  'center',
           }}
         >
-          <p className="type-caption" style={{ color: 'rgba(245,240,232,0.55)' }}>No images available</p>
+          <p className="type-caption" style={{ color: 'var(--text-secondary)' }}>No images available</p>
         </div>
       )}
 
@@ -633,7 +633,7 @@ export default async function PropertyDetailPage(
               </h2>
               <p
                 className="type-body-sm"
-                style={{ color: 'rgba(245,240,232,0.65)', lineHeight: 1.8, marginBottom: 0 }}
+                style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 0 }}
               >
                 Our advisors will answer every question and organise a discreet
                 visit around your schedule. All enquiries are handled with
@@ -670,7 +670,7 @@ export default async function PropertyDetailPage(
                   letterSpacing:  '0.06em',
                   textTransform:  'uppercase',
                   textDecoration: 'none',
-                  color:          'rgba(245,240,232,0.65)',
+                  color:          'var(--text-secondary)',
                   transition:     'color 200ms ease',
                   marginTop:      '2px',
                   justifySelf:    'center',
@@ -699,7 +699,7 @@ export default async function PropertyDetailPage(
           right:           0,
           zIndex:          50,
           backgroundColor: 'var(--bg-deep)',
-          borderTop:       '1px solid rgba(245,240,232,0.12)',
+          borderTop:       '1px solid rgba(20,20,19,0.10)',
           padding:         '12px clamp(1.25rem, 5vw, 2rem)',
           paddingBottom:   'max(12px, env(safe-area-inset-bottom))',
           display:         'flex',
@@ -711,7 +711,7 @@ export default async function PropertyDetailPage(
         }}
       >
         <div>
-          <p className="type-caption" style={{ color: 'rgba(245,240,232,0.62)', marginBottom: '2px', letterSpacing: '0.10em' }}>
+          <p className="type-caption" style={{ color: 'var(--text-secondary)', marginBottom: '2px', letterSpacing: '0.10em' }}>
             Asking Price
           </p>
           <div

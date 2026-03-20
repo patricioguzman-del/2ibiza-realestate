@@ -69,8 +69,8 @@ export default async function BlogPage() {
           backgroundColor: 'var(--bg-deep)',
           paddingTop:      'clamp(6rem, 10vw, 9rem)',
           paddingBottom:   'clamp(3.5rem, 6vw, 5rem)',
-          // Softens the dark→light cut
-          borderBottom:    '1px solid rgba(245,240,232,0.06)',
+          // Softens the light→canvas cut
+          borderBottom:    '1px solid rgba(20,20,19,0.06)',
         }}
       >
         <div
@@ -95,7 +95,7 @@ export default async function BlogPage() {
           </h1>
           <p
             className="type-body"
-            style={{ color: 'rgba(245,240,232,0.72)', maxWidth: '58ch', lineHeight: 1.8 }}
+            style={{ color: 'var(--text-secondary)', maxWidth: '58ch', lineHeight: 1.8 }}
           >
             Market intelligence, area guides and lifestyle perspectives from the team
             that knows Ibiza. Written for buyers who want to understand the island
@@ -142,7 +142,7 @@ export default async function BlogPage() {
               </h2>
               <p
                 className="type-body-sm"
-                style={{ color: 'rgba(245,240,232,0.65)', lineHeight: 1.8, marginBottom: 0 }}
+                style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 0 }}
               >
                 Our team has advised buyers across every area and price point on
                 the island. Whatever stage you&apos;re at, we can help you make

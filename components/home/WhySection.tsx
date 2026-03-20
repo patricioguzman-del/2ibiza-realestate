@@ -63,7 +63,7 @@ export default function WhySection() {
             <p
               className="type-body"
               style={{
-                color:        'rgba(245,240,232,0.76)',
+                color:        'var(--text-secondary)',
                 lineHeight:   1.78,
                 maxWidth:     '44ch',
                 marginBottom: '44px',
@@ -111,7 +111,7 @@ export default function WhySection() {
                 <p
                   className="type-body"
                   style={{
-                    color:        'rgba(245,240,232,0.76)',
+                    color:        'var(--text-secondary)',
                     lineHeight:   1.78,
                     maxWidth:     '420px',
                     marginBottom: 0,
@@ -160,7 +160,7 @@ export default function WhySection() {
                   fontStyle:     'italic',
                   lineHeight:    1.72,
                   letterSpacing: '-0.01em',
-                  color:         'rgba(245,240,232,0.78)',
+                  color:         'var(--text-secondary)',
                   marginBottom:  '22px',
                 }}
               >
@@ -177,7 +177,7 @@ export default function WhySection() {
                     fontWeight:    500,
                     letterSpacing: '0.16em',
                     textTransform: 'uppercase',
-                    color:         'rgba(245,240,232,0.38)',
+                    color:         'var(--text-tertiary)',
                   }}
                 >
                   Entrepreneur &amp; family buyer

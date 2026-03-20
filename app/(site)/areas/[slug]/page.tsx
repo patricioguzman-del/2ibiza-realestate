@@ -451,7 +451,7 @@ export default async function AreaDetailPage({
             <p
               className="type-body-sm"
               style={{
-                color:        'rgba(245,240,232,0.62)',
+                color:        'var(--text-secondary)',
                 lineHeight:   1.8,
                 marginBottom: '2rem',
               }}
@@ -503,7 +503,7 @@ export default async function AreaDetailPage({
               </h2>
               <p
                 className="type-body-sm"
-                style={{ color: 'rgba(245,240,232,0.65)', lineHeight: 1.8, marginBottom: 0 }}
+                style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 0 }}
               >
                 Our advisors know {area.name} intimately — every neighbourhood, every
                 micro-climate, and the properties that never reach the public market. Tell

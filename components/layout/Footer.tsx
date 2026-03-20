@@ -70,7 +70,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ backgroundColor: 'var(--bg-deep)', borderTop: '1px solid rgba(245,240,232,0.10)' }}>
+    <footer style={{ backgroundColor: 'var(--bg-deep)', borderTop: '1px solid rgba(20,20,19,0.10)' }}>
 
       {/* ── Main grid ──────────────────────────────────────────────── */}
       {/*
@@ -110,7 +110,7 @@ export default function Footer() {
             <p
               className="type-body-sm"
               style={{
-                color:        'rgba(245,240,232,0.76)',
+                color:        'var(--text-secondary)',
                 lineHeight:   1.72,
                 maxWidth:     '280px',
                 marginBottom: '22px',
@@ -147,7 +147,7 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: 'rgba(245,240,232,0.62)', display: 'flex' }}
+                  style={{ color: 'var(--text-secondary)', display: 'flex' }}
                 >
                   {icon}
                 </a>
@@ -179,7 +179,7 @@ export default function Footer() {
         >
           <p
             className="type-caption"
-            style={{ color: 'rgba(245,240,232,0.62)', letterSpacing: '0.04em' }}
+            style={{ color: 'var(--text-secondary)', letterSpacing: '0.04em' }}
           >
             © {year} 2ibiza Real Estate. All rights reserved.
           </p>
@@ -219,7 +219,7 @@ function FooterColumn({ title, links }: FooterColumnProps) {
       */}
       <p
         className="footer-col-title mb-6"
-        style={{ color: 'rgba(245,240,232,0.62)', marginTop: 0 }}
+        style={{ color: 'var(--text-secondary)', marginTop: 0 }}
       >
         {title}
       </p>
