@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: '/blog',       label: 'Journal'    },
   { href: '/about',      label: 'About'      },
   { href: '/sell',       label: 'Sell'       },
+  { href: '/contact',    label: 'Contact'    },
 ]
 
 // ─── Top bar height (used to offset the main nav) ────────────────────────────
@@ -76,7 +77,7 @@ export default function Navbar() {
           zIndex:          49,
           height:          `${TOPBAR_HEIGHT}px`,
           backgroundColor: 'var(--bg-deep)',
-          borderBottom:    '1px solid rgba(245,240,232,0.10)',
+          borderBottom:    '1px solid var(--border-soft)',
           display:         'flex',
           alignItems:      'center',
           transition:      'background-color 280ms ease',
@@ -93,15 +94,15 @@ export default function Navbar() {
               fontSize:       '12px',
               fontWeight:     500,
               letterSpacing:  '0.05em',
-              color:          'rgba(245,240,232,0.78)',
+              color:          'var(--text-secondary)',
               textDecoration: 'none',
               transition:     'color var(--transition-ui)',
               display:        'flex',
               alignItems:     'center',
               gap:            '7px',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-on-dark)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.78)')}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0, opacity: 0.70 }}>
               <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -116,15 +117,15 @@ export default function Navbar() {
               fontSize:       '12px',
               fontWeight:     500,
               letterSpacing:  '0.05em',
-              color:          'rgba(245,240,232,0.78)',
+              color:          'var(--text-secondary)',
               textDecoration: 'none',
               transition:     'color var(--transition-ui)',
               display:        'flex',
               alignItems:     'center',
               gap:            '7px',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-on-dark)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.78)')}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             <svg width="13" height="10" viewBox="0 0 24 18" fill="none" aria-hidden="true" style={{ flexShrink: 0, opacity: 0.70 }}>
               <rect x="1" y="1" width="22" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
@@ -142,8 +143,8 @@ export default function Navbar() {
         style={{
           top:             scrolled ? '0' : `${TOPBAR_HEIGHT}px`,
           height:          scrolled ? '60px' : '68px',
-          backgroundColor: solidBg ? 'var(--bg-deep)' : 'rgba(47,58,55,0.42)',
-          borderColor:     solidBg ? 'var(--border-dark)' : 'rgba(245,240,232,0.08)',
+          backgroundColor: solidBg ? 'var(--bg-deep)' : 'rgba(20,20,19,0.38)',
+          borderColor:     solidBg ? 'var(--border-soft)' : 'rgba(250,249,245,0.08)',
           backdropFilter:  'blur(14px)',
           transition:      'top 280ms ease, height 280ms ease, background-color 280ms ease',
         }}
@@ -157,7 +158,12 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-1 no-underline group shrink-0" aria-label="2ibiza Real Estate — Home">
             <span
               className="font-serif"
-              style={{ fontSize: '20px', fontWeight: 500, letterSpacing: '0.04em', color: 'var(--text-on-dark)' }}
+              style={{
+                fontSize:      '20px',
+                fontWeight:    500,
+                letterSpacing: '0.04em',
+                color:         solidBg ? 'var(--text-primary)' : 'rgba(250,249,245,0.95)',
+              }}
             >
               2ibiza
             </span>
@@ -180,6 +186,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       className={`nav-link ${isActive ? 'nav-link-active' : ''}`}
+                      style={!solidBg ? { color: 'rgba(250,249,245,0.82)' } : undefined}
                     >
                       {link.label}
                     </Link>
@@ -194,7 +201,7 @@ export default function Navbar() {
                 display:         'block',
                 width:           '1px',
                 height:          '16px',
-                backgroundColor: 'rgba(245,240,232,0.15)',
+                backgroundColor: solidBg ? 'rgba(20,20,19,0.15)' : 'rgba(250,249,245,0.25)',
                 flexShrink:      0,
               }}
               aria-hidden="true"
@@ -218,17 +225,17 @@ export default function Navbar() {
           >
             <span
               className={`block w-6 h-px transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
-              style={{ backgroundColor: 'var(--text-on-dark)' }}
+              style={{ backgroundColor: solidBg ? 'var(--text-primary)' : 'rgba(250,249,245,0.90)' }}
               aria-hidden="true"
             />
             <span
               className={`block w-4 h-px transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}
-              style={{ backgroundColor: 'var(--text-on-dark)' }}
+              style={{ backgroundColor: solidBg ? 'var(--text-primary)' : 'rgba(250,249,245,0.90)' }}
               aria-hidden="true"
             />
             <span
               className={`block w-6 h-px transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}
-              style={{ backgroundColor: 'var(--text-on-dark)' }}
+              style={{ backgroundColor: solidBg ? 'var(--text-primary)' : 'rgba(250,249,245,0.90)' }}
               aria-hidden="true"
             />
           </button>

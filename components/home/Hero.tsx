@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { BUDGET_OPTIONS, BED_OPTIONS, PROPERTY_TYPE_LABELS } from '../../lib/constants'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -18,8 +17,7 @@ const AREAS = [
 const TYPES = Object.values(PROPERTY_TYPE_LABELS)
 
 const TRUST_ITEMS = [
-  'Local market knowledge',
-  'Private viewings',
+  'Expert market knowledge',
   'Buyer & seller guidance',
   'English, Spanish & French-speaking service',
 ]
@@ -93,14 +91,14 @@ export default function Hero() {
         {/* Base wash */}
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(47,58,55,0.14)' }}
+          style={{ backgroundColor: 'rgba(20,20,19,0.08)' }}
         />
         {/* Left directional */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(105deg, rgba(47,58,55,0.84) 0%, rgba(47,58,55,0.62) 28%, rgba(47,58,55,0.22) 52%, transparent 72%)',
+              'linear-gradient(105deg, rgba(20,20,19,0.55) 0%, rgba(20,20,19,0.38) 30%, rgba(20,20,19,0.16) 55%, rgba(20,20,19,0.04) 78%)',
           }}
         />
         {/* Text-column scrim */}
@@ -108,15 +106,15 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to right, rgba(47,58,55,0.32) 0%, rgba(47,58,55,0.08) 42%, transparent 58%)',
+              'linear-gradient(to right, rgba(20,20,19,0.18) 0%, rgba(20,20,19,0.04) 42%, transparent 58%)',
           }}
         />
-        {/* Bottom vignette — strengthened for search panel legibility */}
+        {/* Bottom vignette */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to top, rgba(47,58,55,0.72) 0%, rgba(47,58,55,0.10) 28%, transparent 52%)',
+              'linear-gradient(to top, rgba(20,20,19,0.40) 0%, rgba(20,20,19,0.06) 28%, transparent 52%)',
           }}
         />
       </div>
@@ -141,7 +139,7 @@ export default function Hero() {
           <motion.p
             {...FADE_UP(0.08)}
             className="type-eyebrow"
-            style={{ color: 'var(--accent-sand)', marginBottom: '22px' }}
+            style={{ color: 'var(--text-on-image-muted)', marginBottom: '22px' }}
           >
             Ibiza Real Estate
           </motion.p>
@@ -149,7 +147,7 @@ export default function Hero() {
           {/* ── H1 — word-by-word masked reveal ─────────────────────────── */}
           <motion.h1
             style={{
-              color:         'var(--text-on-dark)',
+              color:         'var(--text-on-image)',
               marginBottom:  '26px',
               fontSize:      'clamp(2.6rem, 5.5vw, 5rem)',
               lineHeight:    0.98,
@@ -186,7 +184,7 @@ export default function Hero() {
             {...FADE_UP(0.56)}
             className="type-body-lg"
             style={{
-              color:        'rgba(245,240,232,0.88)',
+              color:        'var(--text-on-image)',
               maxWidth:     '460px',
               lineHeight:   1.68,
               marginBottom: '36px',
@@ -196,25 +194,46 @@ export default function Hero() {
             sell the island&apos;s finest properties — on and off market.
           </motion.p>
 
-          {/* ── CTAs ─────────────────────────────────────────────────────── */}
+          {/* ── Search panel ─────────────────────────────────────────────── */}
           <motion.div
-            {...FADE_UP(0.68)}
-            className="flex flex-wrap items-center"
-            style={{ gap: '14px', marginBottom: '38px' }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.68, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            style={{ marginBottom: '32px', borderRadius: '12px', overflow: 'hidden', maxWidth: '720px' }}
+            className="hero-search-panel"
           >
-            <Link href="/properties" className="btn-primary">
-              Browse Properties
-            </Link>
-            <Link
-              href="/sell"
-              className="btn-ghost-dark"
-              style={{
-                borderColor:     'rgba(245,240,232,0.72)',
-                backgroundColor: 'rgba(245,240,232,0.11)',
-              }}
-            >
-              Request a Valuation
-            </Link>
+            <div className="hero-search-panel-inner" style={{ paddingInline: 0 }}>
+              <HeroField label="Area" value={area} onChange={setArea}>
+                <option value="">All Areas</option>
+                {AREAS.map(a => <option key={a} value={a}>{a}</option>)}
+              </HeroField>
+              <div className="hero-search-panel-divider" />
+              <HeroField label="Property Type" value={type} onChange={setType}>
+                <option value="">Any Type</option>
+                {TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+              </HeroField>
+              <div className="hero-search-panel-divider" />
+              <HeroField label="Budget" value={budget} onChange={setBudget}>
+                <option value="">Any Budget</option>
+                {BUDGET_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </HeroField>
+              <div className="hero-search-panel-divider" />
+              <HeroField label="Bedrooms" value={beds} onChange={setBeds}>
+                <option value="">Any</option>
+                {BED_OPTIONS.map(n => <option key={n} value={String(n)}>{n}+ beds</option>)}
+              </HeroField>
+              <button
+                onClick={handleSearch}
+                className="hero-search-panel-btn"
+                aria-label="Search properties"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="5.75" cy="5.75" r="4.25" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M9 9L12.5 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square"/>
+                </svg>
+                Search
+              </button>
+            </div>
           </motion.div>
 
           {/* ── Trust strip ──────────────────────────────────────────────── */}
@@ -230,7 +249,7 @@ export default function Hero() {
                     fontSize:      '12px',
                     fontWeight:    500,
                     letterSpacing: '0.05em',
-                    color:         'rgba(245,240,232,0.75)',
+                    color:         'var(--text-on-image)',
                   }}
                 >
                   {item}
@@ -239,7 +258,7 @@ export default function Hero() {
                   <span
                     style={{
                       margin:     '0 10px',
-                      color:      'rgba(245,240,232,0.30)',
+                      color:      'var(--text-on-image-faint)',
                       fontSize:   '14px',
                       lineHeight: 1,
                     }}
@@ -254,52 +273,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── C. Integrated search panel — docked to bottom of hero ────────── */}
-      <motion.div
-        className="relative z-20 hero-search-panel"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="hero-search-panel-inner">
-
-          <HeroField label="Area" value={area} onChange={setArea}>
-            <option value="">All Areas</option>
-            {AREAS.map(a => <option key={a} value={a}>{a}</option>)}
-          </HeroField>
-          <div className="hero-search-panel-divider" />
-
-          <HeroField label="Property Type" value={type} onChange={setType}>
-            <option value="">Any Type</option>
-            {TYPES.map(t => <option key={t} value={t}>{t}</option>)}
-          </HeroField>
-          <div className="hero-search-panel-divider" />
-
-          <HeroField label="Budget" value={budget} onChange={setBudget}>
-            <option value="">Any Budget</option>
-            {BUDGET_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
-          </HeroField>
-          <div className="hero-search-panel-divider" />
-
-          <HeroField label="Bedrooms" value={beds} onChange={setBeds}>
-            <option value="">Any</option>
-            {BED_OPTIONS.map(n => <option key={n} value={String(n)}>{n}+ beds</option>)}
-          </HeroField>
-
-          <button
-            onClick={handleSearch}
-            className="hero-search-panel-btn"
-            aria-label="Search properties"
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <circle cx="5.75" cy="5.75" r="4.25" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M9 9L12.5 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square"/>
-            </svg>
-            Search
-          </button>
-
-        </div>
-      </motion.div>
 
     </section>
   )
