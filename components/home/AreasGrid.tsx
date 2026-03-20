@@ -129,7 +129,7 @@ function AreaCard({
                 fontStyle:     'italic',
                 fontWeight:    300,
                 lineHeight:    1.2,
-                color:         'rgba(245,240,232,0.50)',
+                color:         'rgba(245,240,232,0.75)',
                 letterSpacing: '-0.02em',
                 maxWidth:      '18ch',
                 margin:        0,
@@ -148,7 +148,7 @@ function AreaCard({
           {propertyCount !== null && propertyCount > 0 && (
             <p
               className="type-eyebrow mb-2"
-              style={{ color: 'rgba(245,240,232,0.48)', fontSize: '10px' }}
+              style={{ color: 'rgba(245,240,232,0.65)', fontSize: '10px' }}
             >
               {propertyCount} {propertyCount === 1 ? 'listing' : 'listings'}
             </p>

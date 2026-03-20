@@ -9,25 +9,25 @@
   --bg-canvas:        #faf9f5;   /* Claude Light — primary page background */
   --bg-canvas-soft:   #faf9f5;   /* Claude Light — same */
   --bg-section-muted: #e8e6dc;   /* Claude Light Gray — subtle alternating sections */
-  --bg-deep:          #e8e6dc;   /* Claude Light Gray — previously dark sections, now light */ /* ⚠️ Name retained for compatibility — value is light gray, not dark */
-  --bg-deep-soft:     #d8d6cc;   /* Slightly deeper light gray — secondary sections */
+  --bg-deep:          #141413;   /* Near-black warm — dark sections (footer, hero, CTAs) */
+  --bg-deep-soft:     #1e1d1b;   /* Slightly lighter dark — hover variant on dark sections */
 
   /* ── Surfaces ── */
   --surface-primary:   #FFFFFF;              /* Pure White — cards, forms */
   --surface-secondary: #e8e6dc;             /* Claude Light Gray — secondary surfaces */
-  --surface-dark:      #d8d6cc;             /* Warm mid-light — previously dark surface */
+  --surface-dark:      #1e1d1b;             /* Dark surface — panels on dark sections */
   --surface-glass:     rgba(255, 255, 255, 0.82);
 
   /* ── Text ── */
   --text-primary:       #3c3a38;   /* Warm soft dark — readable without harshness (10:1 on canvas) */
   --text-secondary:     #636160;   /* Medium warm gray — WCAG AA on all backgrounds (5.9:1) */
   --text-tertiary:      #7e7c79;   /* Light warm gray — labels + captions only (large text) */
-  --text-on-dark:       #3c3a38;   /* Same as primary — sections are now light */ /* ⚠️ Now dark text — "on-dark" sections are light */
-  --text-on-dark-muted: #636160;   /* Same as secondary — WCAG AA on light gray sections */
+  --text-on-dark:       rgba(250, 249, 245, 0.95);   /* Near-white — primary text on dark sections */
+  --text-on-dark-muted: rgba(250, 249, 245, 0.68);   /* Muted light — secondary text on dark sections */
 
   /* ── Accents ── */
   --accent-sea:   #6a9bcc;   /* Claude Blue — hover states, focus rings */
-  --accent-sand:  #e8e6dc;   /* Claude Light Gray */ /* ⚠️ Same as bg-deep — use --accent-stone or --cta-primary-bg for visible accents */
+  --accent-sand:  rgba(250, 249, 245, 0.55);   /* Muted cream — eyebrow labels on dark sections */
   --accent-stone: #b0aea5;   /* Claude Mid Gray */
   --accent-olive: #788c5d;   /* Claude Green */
 

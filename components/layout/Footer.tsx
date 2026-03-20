@@ -179,7 +179,7 @@ export default function Footer() {
         >
           <p
             className="type-caption"
-            style={{ color: 'rgba(245,240,232,0.42)', letterSpacing: '0.04em' }}
+            style={{ color: 'rgba(245,240,232,0.62)', letterSpacing: '0.04em' }}
           >
             © {year} 2ibiza Real Estate. All rights reserved.
           </p>

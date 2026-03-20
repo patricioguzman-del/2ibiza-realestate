@@ -269,12 +269,12 @@ export default function PropertyHeroGallery({
           >
             <p
               className="type-caption"
-              style={{ color: 'rgba(245,240,232,0.4)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 0 }}
+              style={{ color: 'rgba(245,240,232,0.62)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 0 }}
             >
               {title}
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <span className="type-caption" style={{ color: 'rgba(245,240,232,0.4)', marginBottom: 0 }}>
+              <span className="type-caption" style={{ color: 'rgba(245,240,232,0.62)', marginBottom: 0 }}>
                 {lightbox + 1} / {total}
               </span>
               <button
@@ -282,7 +282,7 @@ export default function PropertyHeroGallery({
                 onClick={() => setLightbox(null)}
                 aria-label="Close gallery"
                 style={{
-                  color:      'rgba(245,240,232,0.5)',
+                  color:      'rgba(245,240,232,0.65)',
                   background: 'none',
                   border:     'none',
                   cursor:     'pointer',
@@ -292,7 +292,7 @@ export default function PropertyHeroGallery({
                   transition: 'color 150ms ease',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-on-dark)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.5)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.65)')}
               >
                 ✕
               </button>

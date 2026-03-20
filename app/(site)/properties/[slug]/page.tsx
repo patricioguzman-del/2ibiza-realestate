@@ -208,7 +208,7 @@ export default async function PropertyDetailPage(
             justifyContent:  'center',
           }}
         >
-          <p className="type-caption" style={{ color: 'rgba(245,240,232,0.25)' }}>No images available</p>
+          <p className="type-caption" style={{ color: 'rgba(245,240,232,0.55)' }}>No images available</p>
         </div>
       )}
 
@@ -670,7 +670,7 @@ export default async function PropertyDetailPage(
                   letterSpacing:  '0.06em',
                   textTransform:  'uppercase',
                   textDecoration: 'none',
-                  color:          'rgba(245,240,232,0.45)',
+                  color:          'rgba(245,240,232,0.65)',
                   transition:     'color 200ms ease',
                   marginTop:      '2px',
                   justifySelf:    'center',
@@ -711,7 +711,7 @@ export default async function PropertyDetailPage(
         }}
       >
         <div>
-          <p className="type-caption" style={{ color: 'rgba(245,240,232,0.40)', marginBottom: '2px', letterSpacing: '0.10em' }}>
+          <p className="type-caption" style={{ color: 'rgba(245,240,232,0.62)', marginBottom: '2px', letterSpacing: '0.10em' }}>
             Asking Price
           </p>
           <div
